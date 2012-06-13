@@ -1,0 +1,808 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<om:ObservationCollection xmlns:om="http://www.opengis.net/om/1.0" xmlns:gml="http://www.opengis.net/gml" xmlns:swe="http://www.opengis.net/swe/1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/om/1.0 http://schemas.opengis.net/om/1.0.0/observation.xsd">
+  <gml:metaDataProperty xlink:title="disclaimer">
+    <gml:GenericMetaData>
+      <gml:description>These raw data have not been subjected to the National Ocean Service's quality control or quality assurance procedures and do not meet the criteria and standards of official National Ocean Service data. They are released for limited public use as preliminary data to be used only with appropriate caution.</gml:description>
+    </gml:GenericMetaData>
+  </gml:metaDataProperty>
+  <om:member>
+    <om:Observation>
+      <gml:description>Currents observation at a collection of profiles at a series of times</gml:description>
+      <gml:name>NOAA.NOS.CO-OPS observations at station ID cb0201</gml:name>
+      <gml:boundedBy>
+        <gml:Envelope srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+          <gml:lowerCorner>37.1396 -76.1432</gml:lowerCorner>
+          <gml:upperCorner>37.1396 -76.1432</gml:upperCorner>
+        </gml:Envelope>
+      </gml:boundedBy>
+      <om:samplingTime>
+        <gml:TimePeriod>
+          <gml:beginPosition>2012-02-22T00:05:00Z</gml:beginPosition>
+          <gml:endPosition>2012-02-22T00:29:00Z</gml:endPosition>
+        </gml:TimePeriod>
+      </om:samplingTime>
+      <om:procedure/>
+      <om:observedProperty/>
+      <om:featureOfInterest>
+        <gml:FeatureCollection>
+          <gml:metaDataProperty>
+            <gml:name codeSpace="http://cf-pcmdi.llnl.gov/documents/cf-conventions/1.6/cf-conventions.html#discrete-sampling-geometries">timeSeriesProfile</gml:name>
+          </gml:metaDataProperty>
+          <gml:location>
+            <gml:Point srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+              <gml:pos>37.1396 -76.1432</gml:pos>
+            </gml:Point>
+          </gml:location>
+        </gml:FeatureCollection>
+      </om:featureOfInterest>
+      <om:result>
+        <swe:DataStream>
+          <swe:DataRecord>
+            <swe:field name="time">
+              <swe:Time definition="http://www.opengis.net/def/property/OGC/0/SamplingTime">
+                <swe:uom xlink:href="http://www.opengis.net/def/uom/ISO-8601/0/Gregorian"/>
+              </swe:Time>
+            </swe:field>
+            <swe:field name="profilePoints">
+              <swe:DataArray>
+                <swe:DataRecord>
+                  <swe:field name="location">
+                    <swe:Vector definition="http://www.opengis.net/def/property/OGC/0/PlatformLocation" referenceFrame="http://www.opengis.net/def/crs/EPSG/0/4979">
+                      <swe:coordinate name="lat">
+                        <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/latitude" axisID="Lat">
+                          <swe:uom code="deg"/>
+                          <swe:value>37.1396</swe:value>
+                        </swe:Quantity>
+                      </swe:coordinate>
+                      <swe:coordinate name="lon">
+                        <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/longitude" axisID="Long">
+                          <swe:uom code="deg"/>
+                          <swe:value>-76.1432</swe:value>
+                        </swe:Quantity>
+                      </swe:coordinate>
+                      <swe:coordinate name="bin_distance">
+                        <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/altitude" axisID="h">
+                          <swe:description>Estimated depths of bins relative to the water surface</swe:description>
+                          <swe:uom code="m"/>
+                          <swe:label>Bin 1</swe:label>
+                          <swe:value>3.52</swe:value>
+                          <swe:label>Bin 2</swe:label>
+                          <swe:value>4.52</swe:value>
+                          <swe:label>Bin 3</swe:label>
+                          <swe:value>5.52</swe:value>
+                          <swe:label>Bin 4</swe:label>
+                          <swe:value>6.52</swe:value>
+                          <swe:label>Bin 5</swe:label>
+                          <swe:value>7.52</swe:value>
+                          <swe:label>Bin 6</swe:label>
+                          <swe:value>8.52</swe:value>
+                          <swe:label>Bin 7</swe:label>
+                          <swe:value>9.52</swe:value>
+                          <swe:label>Bin 8</swe:label>
+                          <swe:value>10.52</swe:value>
+                          <swe:label>Bin 9</swe:label>
+                          <swe:value>11.52</swe:value>
+                          <swe:label>Bin 10</swe:label>
+                          <swe:value>12.52</swe:value>  
+                          <swe:label>Bin 11</swe:label>
+                          <swe:value>13.52</swe:value>
+                          <swe:label>Bin 12</swe:label>
+                          <swe:value>14.52</swe:value>
+                        </swe:Quantity>
+                      </swe:coordinate>
+                    </swe:Vector>
+                  </swe:field>
+                  <swe:field name="sensor_depth">
+                    <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/depth">
+                      <swe:uom code="m"/>
+                      <swe:value>2.119</swe:value>
+                    </swe:Quantity>
+                  </swe:field>
+                  <swe:field name="bin_number">
+                    <swe:Quantity definition="Needs a defnition bin_number">
+                    </swe:Quantity>
+                  </swe:field>
+                  <swe:field name="attitude">
+                    <swe:Vector definition="http://www.opengis.net/def/property/OGC/0/PlatformOrientation" referenceFrame="http://www.opengis.net/def/crs/OGC/0/ENU">
+                      <swe:coordinate name="platform_orientation">
+                        <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/platform_orientation" axisID="Z">
+                          <swe:uom code="deg"/>
+                        </swe:Quantity>
+                      </swe:coordinate>
+                      <swe:coordinate name="platform_pitch_angle">
+                        <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/platform_pitch_angle" axisID="X">
+                          <swe:uom code="deg"/>
+                        </swe:Quantity>
+                      </swe:coordinate>
+                      <swe:coordinate name="platform_roll_angle">
+                        <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/platform_roll_angle" axisID="Y">
+                          <swe:uom code="deg"/>
+                        </swe:Quantity>
+                      </swe:coordinate>
+                    </swe:Vector>
+                  </swe:field>
+                  <swe:field name="sea_water_temperature">
+                    <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/sea_water_temperature">
+                      <swe:uom code="Cel"/>
+                    </swe:Quantity>
+                  </swe:field>
+                  <swe:field name="direction_of_sea_water_velocity">
+                    <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/direction_of_sea_water_velocity">
+                      <swe:uom code="deg"/>
+                    </swe:Quantity>
+                  </swe:field>
+                  <swe:field name="sea_water_speed">
+                    <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/sea_water_speed">
+                      <swe:uom code="cm/s"/>
+                    </swe:Quantity>
+                  </swe:field>
+                </swe:DataRecord>
+              </swe:DataArray>
+            </swe:field>
+          </swe:DataRecord>
+          <swe:encoding>
+            <swe:TextEncoding blockSeparator="\n" tokenSeparator=","/>
+          </swe:encoding>
+          <swe:values>
+            2012-02-22T00:05:00Z,1,216.1,-3.6,2.4,6.95,298.0,43.7
+            2012-02-22T00:05:00Z,2,216.1,-3.6,2.4,6.95,308.0,51.7
+            2012-02-22T00:05:00Z,3,216.1,-3.6,2.4,6.95,324.0,64.6
+            2012-02-22T00:05:00Z,4,216.1,-3.6,2.4,6.95,331.0,66.2
+            2012-02-22T00:05:00Z,5,216.1,-3.6,2.4,6.95,335.0,58.7
+            2012-02-22T00:05:00Z,6,216.1,-3.6,2.4,6.95,332.0,52.2
+            2012-02-22T00:05:00Z,7,216.1,-3.6,2.4,6.95,334.0,48.6
+            2012-02-22T00:05:00Z,8,216.1,-3.6,2.4,6.95,331.0,46.6
+            2012-02-22T00:05:00Z,9,216.1,-3.6,2.4,6.95,326.0,47.6
+            2012-02-22T00:05:00Z,10,216.1,-3.6,2.4,6.95,320.0,43.0
+            2012-02-22T00:05:00Z,11,216.1,-3.6,2.4,6.95,322.0,41.2
+            2012-02-22T00:05:00Z,12,216.1,-3.6,2.4,6.95,323.0,35.8
+            
+            2012-02-22T00:11:00Z,1,217.4,-3.6,2.4,6.91,294.0,44.8
+            2012-02-22T00:11:00Z,2,217.4,-3.6,2.4,6.91,309.0,49.5
+            2012-02-22T00:11:00Z,3,217.4,-3.6,2.4,6.91,325.0,63.1
+            2012-02-22T00:11:00Z,4,217.4,-3.6,2.4,6.91,333.0,69.6
+            2012-02-22T00:11:00Z,5,217.4,-3.6,2.4,6.91,332.0,61.8
+            2012-02-22T00:11:00Z,6,217.4,-3.6,2.4,6.91,329.0,56.1
+            2012-02-22T00:11:00Z,7,217.4,-3.6,2.4,6.91,330.0,53.4
+            2012-02-22T00:11:00Z,8,217.4,-3.6,2.4,6.91,328.0,49.7
+            2012-02-22T00:11:00Z,9,217.4,-3.6,2.4,6.91,330.0,53.0
+            2012-02-22T00:11:00Z,10,217.4,-3.6,2.4,6.91,324.0,47.2
+            2012-02-22T00:11:00Z,11,217.4,-3.6,2.4,6.91,321.0,46.6
+            2012-02-22T00:11:00Z,12,217.4,-3.6,2.4,6.91,320.0,42.3
+            
+            2012-02-22T00:17:00Z,1,218.0,-3.6,2.4,6.86,293.0,47.3
+            2012-02-22T00:17:00Z,2,218.0,-3.6,2.4,6.86,312.0,55.5
+            2012-02-22T00:17:00Z,3,218.0,-3.6,2.4,6.86,325.0,66.4
+            2012-02-22T00:17:00Z,4,218.0,-3.6,2.4,6.86,333.0,73.9
+            2012-02-22T00:17:00Z,5,218.0,-3.6,2.4,6.86,333.0,66.6
+            2012-02-22T00:17:00Z,6,218.0,-3.6,2.4,6.86,334.0,57.5
+            2012-02-22T00:17:00Z,7,218.0,-3.6,2.4,6.86,331.0,57.1
+            2012-02-22T00:17:00Z,8,218.0,-3.6,2.4,6.86,330.0,52.9
+            2012-02-22T00:17:00Z,9,218.0,-3.6,2.4,6.86,322.0,41.7
+            2012-02-22T00:17:00Z,10,218.0,-3.6,2.4,6.86,321.0,45.7
+            2012-02-22T00:17:00Z,11,218.0,-3.6,2.4,6.86,316.0,45.3
+            2012-02-22T00:17:00Z,12,218.0,-3.6,2.4,6.86,319.0,39.6
+            
+            2012-02-22T00:23:00Z,1,220.1,-3.5,2.6,6.82,299.0,47.7
+            2012-02-22T00:23:00Z,2,220.1,-3.5,2.6,6.82,315.0,54.4
+            2012-02-22T00:23:00Z,3,220.1,-3.5,2.6,6.82,327.0,67.2
+            2012-02-22T00:23:00Z,4,220.1,-3.5,2.6,6.82,331.0,70.5
+            2012-02-22T00:23:00Z,5,220.1,-3.5,2.6,6.82,333.0,66.8
+            2012-02-22T00:23:00Z,6,220.1,-3.5,2.6,6.82,332.0,59.8
+            2012-02-22T00:23:00Z,7,220.1,-3.5,2.6,6.82,333.0,55.8
+            2012-02-22T00:23:00Z,8,220.1,-3.5,2.6,6.82,332.0,50.6
+            2012-02-22T00:23:00Z,9,220.1,-3.5,2.6,6.82,321.0,49.3
+            2012-02-22T00:23:00Z,10,220.1,-3.5,2.6,6.82,324.0,47.0
+            2012-02-22T00:23:00Z,11,220.1,-3.5,2.6,6.82,316.0,45.1
+            2012-02-22T00:23:00Z,12,220.1,-3.5,2.6,6.82,319.0,40.1
+            
+            2012-02-22T00:29:00Z,1,221.6,-3.4,2.6,6.79,300.0,47.9
+            2012-02-22T00:29:00Z,2,221.6,-3.4,2.6,6.79,313.0,58.1
+            2012-02-22T00:29:00Z,3,221.6,-3.4,2.6,6.79,329.0,70.3
+            2012-02-22T00:29:00Z,4,221.6,-3.4,2.6,6.79,334.0,75.7
+            2012-02-22T00:29:00Z,5,221.6,-3.4,2.6,6.79,332.0,64.6
+            2012-02-22T00:29:00Z,6,221.6,-3.4,2.6,6.79,328.0,62.2
+            2012-02-22T00:29:00Z,7,221.6,-3.4,2.6,6.79,334.0,56.9
+            2012-02-22T00:29:00Z,8,221.6,-3.4,2.6,6.79,330.0,55.5
+            2012-02-22T00:29:00Z,9,221.6,-3.4,2.6,6.79,323.0,49.4
+            2012-02-22T00:29:00Z,10,221.6,-3.4,2.6,6.79,317.0,45.9
+            2012-02-22T00:29:00Z,11,221.6,-3.4,2.6,6.79,319.0,45.9
+            2012-02-22T00:29:00Z,12,221.6,-3.4,2.6,6.79,315.0,44.2            
+          </swe:values>
+        </swe:DataStream>
+      </om:result>
+    </om:Observation>
+  </om:member>
+  <om:member>
+    <om:Observation>
+      <gml:description>Currents observation at a collection of profiles at a series of times</gml:description>
+      <gml:name>NOAA.NOS.CO-OPS observations at station ID cb1001</gml:name>
+      <gml:boundedBy>
+        <gml:Envelope srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+          <gml:lowerCorner>38.4027 -76.3839</gml:lowerCorner>
+          <gml:upperCorner>38.4027 -76.3839</gml:upperCorner>
+        </gml:Envelope>
+      </gml:boundedBy>
+      <om:samplingTime>
+        <gml:TimePeriod>
+          <gml:beginPosition>2012-02-22T00:04:00Z</gml:beginPosition>
+          <gml:endPosition>2012-02-22T00:22:00Z</gml:endPosition>
+        </gml:TimePeriod>
+      </om:samplingTime>
+      <om:procedure/>
+      <om:observedProperty/>
+      <om:featureOfInterest>
+        <gml:FeatureCollection>
+          <gml:metaDataProperty>
+            <gml:name codeSpace="http://cf-pcmdi.llnl.gov/documents/cf-conventions/1.6/cf-conventions.html#discrete-sampling-geometries">timeSeriesProfile</gml:name>
+          </gml:metaDataProperty>
+          <gml:location>
+            <gml:Point srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+              <gml:pos>38.4027 -76.3839</gml:pos>
+            </gml:Point>
+          </gml:location>
+        </gml:FeatureCollection>
+      </om:featureOfInterest>
+      <om:result>
+        <swe:DataStream>
+          <swe:DataRecord>
+            <swe:field name="time">
+              <swe:Time definition="http://www.opengis.net/def/property/OGC/0/SamplingTime">
+                <swe:uom xlink:href="http://www.opengis.net/def/uom/ISO-8601/0/Gregorian"/>
+              </swe:Time>
+            </swe:field>
+            <swe:field name="profilePoints">
+              <swe:DataArray>
+                <swe:DataRecord>
+                  <swe:field name="location">
+                    <swe:Vector definition="http://www.opengis.net/def/property/OGC/0/PlatformLocation" referenceFrame="http://www.opengis.net/def/crs/EPSG/0/4979">
+                      <swe:coordinate name="lat">
+                        <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/latitude" axisID="Lat">
+                          <swe:uom code="deg"/>
+                          <swe:value>38.4027</swe:value>
+                        </swe:Quantity>
+                      </swe:coordinate>
+                      <swe:coordinate name="lon">
+                        <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/longitude" axisID="Long">
+                          <swe:uom code="deg"/>
+                          <swe:value>-76.3839</swe:value>
+                        </swe:Quantity>
+                      </swe:coordinate>
+                      <swe:coordinate name="bin_distance">
+                        <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/altitude" axisID="h">
+                          <swe:description>Estimated depths of bins relative to the water surface</swe:description>
+                          <swe:uom code="m"/>
+                          <swe:label>Bin 1</swe:label>
+                          <swe:value>5.00</swe:value>
+                          <swe:label>Bin 2</swe:label>
+                          <swe:value>9.00</swe:value>
+                          <swe:label>Bin 3</swe:label>
+                          <swe:value>13.00</swe:value>
+                          <swe:label>Bin 4</swe:label>
+                          <swe:value>17.00</swe:value>
+                          <swe:label>Bin 5</swe:label>
+                          <swe:value>21.00</swe:value>
+                          <swe:label>Bin 6</swe:label>
+                          <swe:value>25.00</swe:value>
+                          <swe:label>Bin 7</swe:label>
+                          <swe:value>29.00</swe:value>
+                          <swe:label>Bin 8</swe:label>
+                          <swe:value>33.00</swe:value>
+                          <swe:label>Bin 9</swe:label>
+                          <swe:value>37.00</swe:value>
+                          <swe:label>Bin 10</swe:label>
+                          <swe:value>41.00</swe:value>  
+                          <swe:label>Bin 11</swe:label>
+                          <swe:value>45.00</swe:value>
+                          <swe:label>Bin 12</swe:label>
+                          <swe:value>49.00</swe:value>
+                          <swe:label>Bin 13</swe:label>
+                          <swe:value>53.00</swe:value>
+                          <swe:label>Bin 14</swe:label>
+                          <swe:value>57.00</swe:value>
+                          <swe:label>Bin 15</swe:label>
+                          <swe:value>61.00</swe:value>
+                          <swe:label>Bin 16</swe:label>
+                          <swe:value>65.00</swe:value>
+                          <swe:label>Bin 17</swe:label>
+                          <swe:value>69.00</swe:value>
+                          <swe:label>Bin 18</swe:label>
+                          <swe:value>73.00</swe:value>
+                          <swe:label>Bin 19</swe:label>
+                          <swe:value>77.00</swe:value>
+                          <swe:label>Bin 20</swe:label>
+                          <swe:value>81.00</swe:value>
+                          <swe:label>Bin 21</swe:label>
+                          <swe:value>85.00</swe:value>
+                          <swe:label>Bin 22</swe:label>
+                          <swe:value>89.00</swe:value>
+                          <swe:label>Bin 23</swe:label>
+                          <swe:value>93.00</swe:value>
+                          <swe:label>Bin 24</swe:label>
+                          <swe:value>97.00</swe:value>
+                          <swe:label>Bin 25</swe:label>
+                          <swe:value>101.00</swe:value>
+                          <swe:label>Bin 26</swe:label>
+                          <swe:value>105.00</swe:value>
+                          <swe:label>Bin 27</swe:label>
+                          <swe:value>109.00</swe:value>
+                          <swe:label>Bin 28</swe:label>
+                          <swe:value>113.00</swe:value>
+                          <swe:label>Bin 29</swe:label>
+                          <swe:value>117.00</swe:value>
+                          <swe:label>Bin 30</swe:label>
+                          <swe:value>121.00</swe:value>   
+                          <swe:label>Bin 31</swe:label>
+                          <swe:value>125.00</swe:value>
+                          <swe:label>Bin 32</swe:label>
+                          <swe:value>129.00</swe:value>
+                          <swe:label>Bin 33</swe:label>
+                          <swe:value>133.00</swe:value>
+                          <swe:label>Bin 34</swe:label>
+                          <swe:value>137.00</swe:value>
+                          <swe:label>Bin 35</swe:label>
+                          <swe:value>141.00</swe:value>
+                          <swe:label>Bin 36</swe:label>
+                          <swe:value>145.00</swe:value>
+                          <swe:label>Bin 37</swe:label>
+                          <swe:value>149.00</swe:value>
+                          <swe:label>Bin 38</swe:label>
+                          <swe:value>153.00</swe:value>
+                          <swe:label>Bin 39</swe:label>
+                          <swe:value>157.00</swe:value>
+                          <swe:label>Bin 40</swe:label>
+                          <swe:value>161.00</swe:value>
+                        </swe:Quantity>
+                      </swe:coordinate>
+                    </swe:Vector>
+                  </swe:field>
+                  <swe:field name="sensor_depth">
+                    <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/depth">
+                      <swe:uom code="m"/>
+                      <swe:value>4.5</swe:value>
+                    </swe:Quantity>
+                  </swe:field>
+                  <swe:field name="bin_number">
+                    <swe:Quantity definition="Needs a defnition bin_number">
+                    </swe:Quantity>
+                  </swe:field>
+                  <swe:field name="attitude">
+                    <swe:Vector definition="http://www.opengis.net/def/property/OGC/0/PlatformOrientation" referenceFrame="http://www.opengis.net/def/crs/OGC/0/ENU">
+                      <swe:coordinate name="platform_orientation">
+                        <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/platform_orientation" axisID="Z">
+                          <swe:uom code="deg"/>
+                        </swe:Quantity>
+                      </swe:coordinate>
+                      <swe:coordinate name="platform_pitch_angle">
+                        <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/platform_pitch_angle" axisID="X">
+                          <swe:uom code="deg"/>
+                        </swe:Quantity>
+                      </swe:coordinate>
+                      <swe:coordinate name="platform_roll_angle">
+                        <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/platform_roll_angle" axisID="Y">
+                          <swe:uom code="deg"/>
+                        </swe:Quantity>
+                      </swe:coordinate>
+                    </swe:Vector>
+                  </swe:field>
+                  <swe:field name="sea_water_temperature">
+                    <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/sea_water_temperature">
+                      <swe:uom code="Cel"/>
+                    </swe:Quantity>
+                  </swe:field>
+                  <swe:field name="direction_of_sea_water_velocity">
+                    <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/direction_of_sea_water_velocity">
+                      <swe:uom code="deg"/>
+                    </swe:Quantity>
+                  </swe:field>
+                  <swe:field name="sea_water_speed">
+                    <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/sea_water_speed">
+                      <swe:uom code="cm/s"/>
+                    </swe:Quantity>
+                  </swe:field>
+                </swe:DataRecord>
+              </swe:DataArray>
+            </swe:field>
+          </swe:DataRecord>
+          <swe:encoding>
+            <swe:TextEncoding blockSeparator="\n" tokenSeparator=","/>
+          </swe:encoding>
+          <swe:values>
+            2012-02-22T00:04:00Z,1,180.0,0.2,-0.6,6.58,119.0,18.4
+            2012-02-22T00:04:00Z,2,180.0,0.2,-0.6,6.58,112.0,22.9
+            2012-02-22T00:04:00Z,3,180.0,0.2,-0.6,6.58,119.0,27.8
+            2012-02-22T00:04:00Z,4,180.0,0.2,-0.6,6.58,124.0,32.5
+            2012-02-22T00:04:00Z,5,180.0,0.2,-0.6,6.58,128.0,37.2
+            2012-02-22T00:04:00Z,6,180.0,0.2,-0.6,6.58,136.0,42.8
+            2012-02-22T00:04:00Z,7,180.0,0.2,-0.6,6.58,136.0,43.9
+            2012-02-22T00:04:00Z,8,180.0,0.2,-0.6,6.58,135.0,43.4
+            2012-02-22T00:04:00Z,9,180.0,0.2,-0.6,6.58,135.0,43.7
+            2012-02-22T00:04:00Z,10,180.0,0.2,-0.6,6.58,136.0,43.2
+            2012-02-22T00:04:00Z,11,180.0,0.2,-0.6,6.58,138.0,43.5
+            2012-02-22T00:04:00Z,12,180.0,0.2,-0.6,6.58,137.0,40.0
+            2012-02-22T00:04:00Z,13,180.0,0.2,-0.6,6.58,135.0,40.0
+            2012-02-22T00:04:00Z,14,180.0,0.2,-0.6,6.58,133.0,40.8
+            2012-02-22T00:04:00Z,15,180.0,0.2,-0.6,6.58,134.0,38.8
+            2012-02-22T00:04:00Z,16,180.0,0.2,-0.6,6.58,134.0,38.4
+            2012-02-22T00:04:00Z,17,180.0,0.2,-0.6,6.58,133.0,35.7
+            2012-02-22T00:04:00Z,18,180.0,0.2,-0.6,6.58,133.0,35.9
+            2012-02-22T00:04:00Z,19,180.0,0.2,-0.6,6.58,132.0,33.9
+            2012-02-22T00:04:00Z,20,180.0,0.2,-0.6,6.58,133.0,35.1
+            2012-02-22T00:04:00Z,21,180.0,0.2,-0.6,6.58,131.0,29.3
+            2012-02-22T00:04:00Z,22,180.0,0.2,-0.6,6.58,130.0,28.6
+            2012-02-22T00:04:00Z,23,180.0,0.2,-0.6,6.58,129.0,30.4
+            2012-02-22T00:04:00Z,24,180.0,0.2,-0.6,6.58,129.0,27.7
+            2012-02-22T00:04:00Z,25,180.0,0.2,-0.6,6.58,131.0,36.6
+            2012-02-22T00:04:00Z,26,180.0,0.2,-0.6,6.58,130.0,36.7
+            2012-02-22T00:04:00Z,27,180.0,0.2,-0.6,6.58,135.0,41.0
+            2012-02-22T00:04:00Z,28,180.0,0.2,-0.6,6.58,133.0,39.6
+            2012-02-22T00:04:00Z,29,180.0,0.2,-0.6,6.58,133.0,35.3
+            2012-02-22T00:04:00Z,30,180.0,0.2,-0.6,6.58,130.0,32.5
+            2012-02-22T00:04:00Z,31,180.0,0.2,-0.6,6.58,128.0,27.9
+            2012-02-22T00:04:00Z,32,180.0,0.2,-0.6,6.58,124.0,22.5
+            2012-02-22T00:04:00Z,33,180.0,0.2,-0.6,6.58,98.0,12.7
+            2012-02-22T00:04:00Z,34,180.0,0.2,-0.6,6.58,32.0,10.3
+            2012-02-22T00:04:00Z,35,180.0,0.2,-0.6,6.58,43.0,11.7
+            2012-02-22T00:04:00Z,36,180.0,0.2,-0.6,6.58,60.0,11.2
+            2012-02-22T00:04:00Z,37,180.0,0.2,-0.6,6.58,94.0,14.5
+            2012-02-22T00:04:00Z,38,180.0,0.2,-0.6,6.58,111.0,18.1
+            2012-02-22T00:04:00Z,39,180.0,0.2,-0.6,6.58,124.0,25.9
+            2012-02-22T00:04:00Z,40,180.0,0.2,-0.6,6.58,128.0,27.4
+            
+            2012-02-22T00:10:00Z,1,180.0,0.2,-0.6,6.56,117.0,19.6
+            2012-02-22T00:10:00Z,2,180.0,0.2,-0.6,6.56,117.0,24.2
+            2012-02-22T00:10:00Z,3,180.0,0.2,-0.6,6.56,118.0,27.5
+            2012-02-22T00:10:00Z,4,180.0,0.2,-0.6,6.56,124.0,32.7
+            2012-02-22T00:10:00Z,5,180.0,0.2,-0.6,6.56,129.0,39.0
+            2012-02-22T00:10:00Z,6,180.0,0.2,-0.6,6.56,136.0,43.4
+            2012-02-22T00:10:00Z,7,180.0,0.2,-0.6,6.56,137.0,45.8
+            2012-02-22T00:10:00Z,8,180.0,0.2,-0.6,6.56,135.0,43.7
+            2012-02-22T00:10:00Z,9,180.0,0.2,-0.6,6.56,134.0,41.2
+            2012-02-22T00:10:00Z,10,180.0,0.2,-0.6,6.56,135.0,43.7
+            2012-02-22T00:10:00Z,11,180.0,0.2,-0.6,6.56,138.0,42.7
+            2012-02-22T00:10:00Z,12,180.0,0.2,-0.6,6.56,139.0,43.5
+            2012-02-22T00:10:00Z,13,180.0,0.2,-0.6,6.56,136.0,41.6
+            2012-02-22T00:10:00Z,14,180.0,0.2,-0.6,6.56,136.0,42.3
+            2012-02-22T00:10:00Z,15,180.0,0.2,-0.6,6.56,133.0,39.7
+            2012-02-22T00:10:00Z,16,180.0,0.2,-0.6,6.56,133.0,39.3
+            2012-02-22T00:10:00Z,17,180.0,0.2,-0.6,6.56,136.0,40.3
+            2012-02-22T00:10:00Z,18,180.0,0.2,-0.6,6.56,137.0,40.5
+            2012-02-22T00:10:00Z,19,180.0,0.2,-0.6,6.56,133.0,35.6
+            2012-02-22T00:10:00Z,20,180.0,0.2,-0.6,6.56,132.0,34.0
+            2012-02-22T00:10:00Z,21,180.0,0.2,-0.6,6.56,132.0,37.7
+            2012-02-22T00:10:00Z,22,180.0,0.2,-0.6,6.56,133.0,37.0
+            2012-02-22T00:10:00Z,23,180.0,0.2,-0.6,6.56,132.0,31.2
+            2012-02-22T00:10:00Z,24,180.0,0.2,-0.6,6.56,132.0,32.8
+            2012-02-22T00:10:00Z,25,180.0,0.2,-0.6,6.56,130.0,35.9
+            2012-02-22T00:10:00Z,26,180.0,0.2,-0.6,6.56,130.0,35.9
+            2012-02-22T00:10:00Z,27,180.0,0.2,-0.6,6.56,128.0,35.9
+            2012-02-22T00:10:00Z,28,180.0,0.2,-0.6,6.56,128.0,35.8
+            2012-02-22T00:10:00Z,29,180.0,0.2,-0.6,6.56,125.0,32.5
+            2012-02-22T00:10:00Z,30,180.0,0.2,-0.6,6.56,124.0,30.8
+            2012-02-22T00:10:00Z,31,180.0,0.2,-0.6,6.56,124.0,26.9
+            2012-02-22T00:10:00Z,32,180.0,0.2,-0.6,6.56,123.0,24.8
+            2012-02-22T00:10:00Z,33,180.0,0.2,-0.6,6.56,107.0,16.1
+            2012-02-22T00:10:00Z,34,180.0,0.2,-0.6,6.56,34.0,12.1
+            2012-02-22T00:10:00Z,35,180.0,0.2,-0.6,6.56,42.0,12.4
+            2012-02-22T00:10:00Z,36,180.0,0.2,-0.6,6.56,66.0,12.0
+            2012-02-22T00:10:00Z,37,180.0,0.2,-0.6,6.56,100.0,16.2
+            2012-02-22T00:10:00Z,38,180.0,0.2,-0.6,6.56,115.0,20.6
+            2012-02-22T00:10:00Z,39,180.0,0.2,-0.6,6.56,124.0,26.4
+            2012-02-22T00:10:00Z,40,180.0,0.2,-0.6,6.56,128.0,28.3
+            
+            2012-02-22T00:16:00Z,1,180.0,0.2,-0.6,6.56,120.0,21.1
+            2012-02-22T00:16:00Z,2,180.0,0.2,-0.6,6.56,118.0,24.5
+            2012-02-22T00:16:00Z,3,180.0,0.2,-0.6,6.56,118.0,28.6
+            2012-02-22T00:16:00Z,4,180.0,0.2,-0.6,6.56,124.0,32.5
+            2012-02-22T00:16:00Z,5,180.0,0.2,-0.6,6.56,130.0,40.5
+            2012-02-22T00:16:00Z,6,180.0,0.2,-0.6,6.56,133.0,43.1
+            2012-02-22T00:16:00Z,7,180.0,0.2,-0.6,6.56,137.0,45.8
+            2012-02-22T00:16:00Z,8,180.0,0.2,-0.6,6.56,134.0,43.9
+            2012-02-22T00:16:00Z,9,180.0,0.2,-0.6,6.56,134.0,44.5
+            2012-02-22T00:16:00Z,10,180.0,0.2,-0.6,6.56,136.0,45.9
+            2012-02-22T00:16:00Z,11,180.0,0.2,-0.6,6.56,136.0,45.4
+            2012-02-22T00:16:00Z,12,180.0,0.2,-0.6,6.56,138.0,46.3
+            2012-02-22T00:16:00Z,13,180.0,0.2,-0.6,6.56,137.0,44.5
+            2012-02-22T00:16:00Z,14,180.0,0.2,-0.6,6.56,137.0,45.3
+            2012-02-22T00:16:00Z,15,180.0,0.2,-0.6,6.56,135.0,42.5
+            2012-02-22T00:16:00Z,16,180.0,0.2,-0.6,6.56,137.0,41.1
+            2012-02-22T00:16:00Z,17,180.0,0.2,-0.6,6.56,139.0,45.3
+            2012-02-22T00:16:00Z,18,180.0,0.2,-0.6,6.56,138.0,43.4
+            2012-02-22T00:16:00Z,19,180.0,0.2,-0.6,6.56,136.0,42.2
+            2012-02-22T00:16:00Z,20,180.0,0.2,-0.6,6.56,135.0,36.7
+            2012-02-22T00:16:00Z,21,180.0,0.2,-0.6,6.56,135.0,34.9
+            2012-02-22T00:16:00Z,22,180.0,0.2,-0.6,6.56,135.0,35.6
+            2012-02-22T00:16:00Z,23,180.0,0.2,-0.6,6.56,132.0,35.5
+            2012-02-22T00:16:00Z,24,180.0,0.2,-0.6,6.56,129.0,33.5
+            2012-02-22T00:16:00Z,25,180.0,0.2,-0.6,6.56,127.0,30.6
+            2012-02-22T00:16:00Z,26,180.0,0.2,-0.6,6.56,127.0,29.7
+            2012-02-22T00:16:00Z,27,180.0,0.2,-0.6,6.56,127.0,32.2
+            2012-02-22T00:16:00Z,28,180.0,0.2,-0.6,6.56,127.0,32.6
+            2012-02-22T00:16:00Z,28,180.0,0.2,-0.6,6.56,129.0,33.1
+            2012-02-22T00:16:00Z,30,180.0,0.2,-0.6,6.56,126.0,29.3
+            2012-02-22T00:16:00Z,31,180.0,0.2,-0.6,6.56,122.0,25.5
+            2012-02-22T00:16:00Z,32,180.0,0.2,-0.6,6.56,116.0,21.1
+            2012-02-22T00:16:00Z,33,180.0,0.2,-0.6,6.56,82.0,13.1
+            2012-02-22T00:16:00Z,34,180.0,0.2,-0.6,6.56,21.0,14.1
+            2012-02-22T00:16:00Z,35,180.0,0.2,-0.6,6.56,35.0,13.9
+            2012-02-22T00:16:00Z,36,180.0,0.2,-0.6,6.56,71.0,11.5
+            2012-02-22T00:16:00Z,37,180.0,0.2,-0.6,6.56,114.0,18.4
+            2012-02-22T00:16:00Z,38,180.0,0.2,-0.6,6.56,126.0,26.1
+            2012-02-22T00:16:00Z,39,180.0,0.2,-0.6,6.56,131.0,32.4
+            2012-02-22T00:16:00Z,40,180.0,0.2,-0.6,6.56,132.0,34.8
+            
+            2012-02-22T00:22:00Z,1,180.0,0.2,-0.6,6.54,119.0,22.3
+            2012-02-22T00:22:00Z,2,180.0,0.2,-0.6,6.54,112.0,24.1
+            2012-02-22T00:22:00Z,3,180.0,0.2,-0.6,6.54,117.0,27.0
+            2012-02-22T00:22:00Z,4,180.0,0.2,-0.6,6.54,125.0,31.5
+            2012-02-22T00:22:00Z,5,180.0,0.2,-0.6,6.54,130.0,37.7
+            2012-02-22T00:22:00Z,6,180.0,0.2,-0.6,6.54,135.0,43.7
+            2012-02-22T00:22:00Z,7,180.0,0.2,-0.6,6.54,136.0,42.7
+            2012-02-22T00:22:00Z,8,180.0,0.2,-0.6,6.54,135.0,42.2
+            2012-02-22T00:22:00Z,9,180.0,0.2,-0.6,6.54,134.0,42.8
+            2012-02-22T00:22:00Z,10,180.0,0.2,-0.6,6.54,136.0,42.5
+            2012-02-22T00:22:00Z,11,180.0,0.2,-0.6,6.54,135.0,38.7
+            2012-02-22T00:22:00Z,12,180.0,0.2,-0.6,6.54,134.0,39.8
+            2012-02-22T00:22:00Z,13,180.0,0.2,-0.6,6.54,134.0,40.7
+            2012-02-22T00:22:00Z,14,180.0,0.2,-0.6,6.54,136.0,39.6
+            2012-02-22T00:22:00Z,15,180.0,0.2,-0.6,6.54,140.0,42.1
+            2012-02-22T00:22:00Z,16,180.0,0.2,-0.6,6.54,136.0,40.9
+            2012-02-22T00:22:00Z,17,180.0,0.2,-0.6,6.54,137.0,41.7
+            2012-02-22T00:22:00Z,18,180.0,0.2,-0.6,6.54,137.0,41.4
+            2012-02-22T00:22:00Z,19,180.0,0.2,-0.6,6.54,134.0,40.2
+            2012-02-22T00:22:00Z,20,180.0,0.2,-0.6,6.54,133.0,40.9
+            2012-02-22T00:22:00Z,21,180.0,0.2,-0.6,6.54,129.0,36.3
+            2012-02-22T00:22:00Z,22,180.0,0.2,-0.6,6.54,129.0,35.0
+            2012-02-22T00:22:00Z,23,180.0,0.2,-0.6,6.54,130.0,35.1
+            2012-02-22T00:22:00Z,24,180.0,0.2,-0.6,6.54,125.0,30.3
+            2012-02-22T00:22:00Z,25,180.0,0.2,-0.6,6.54,126.0,31.6
+            2012-02-22T00:22:00Z,26,180.0,0.2,-0.6,6.54,124.0,28.0
+            2012-02-22T00:22:00Z,27,180.0,0.2,-0.6,6.54,119.0,26.7
+            2012-02-22T00:22:00Z,28,180.0,0.2,-0.6,6.54,120.0,29.9
+            2012-02-22T00:22:00Z,28,180.0,0.2,-0.6,6.54,118.0,30.4
+            2012-02-22T00:22:00Z,30,180.0,0.2,-0.6,6.54,120.0,31.2
+            2012-02-22T00:22:00Z,31,180.0,0.2,-0.6,6.54,120.0,28.7
+            2012-02-22T00:22:00Z,32,180.0,0.2,-0.6,6.54,111.0,23.6
+            2012-02-22T00:22:00Z,33,180.0,0.2,-0.6,6.54,98.0,16.6
+            2012-02-22T00:22:00Z,34,180.0,0.2,-0.6,6.54,33.0,12.5
+            2012-02-22T00:22:00Z,35,180.0,0.2,-0.6,6.54,36.0,12.1
+            2012-02-22T00:22:00Z,36,180.0,0.2,-0.6,6.54,76.0,11.6
+            2012-02-22T00:22:00Z,37,180.0,0.2,-0.6,6.54,114.0,18.8
+            2012-02-22T00:22:00Z,38,180.0,0.2,-0.6,6.54,125.0,24.3
+            2012-02-22T00:22:00Z,39,180.0,0.2,-0.6,6.54,127.0,30.2
+            2012-02-22T00:22:00Z,40,180.0,0.2,-0.6,6.54,127.0,32.1            
+          </swe:values>
+        </swe:DataStream>
+      </om:result>
+    </om:Observation>
+  </om:member> 
+  <om:member>
+    <om:Observation>
+      <gml:description>Currents observation at a collection of profiles at a series of times</gml:description>
+      <gml:name>NOAA.NOS.CO-OPS observations at station ID t01010</gml:name>
+      <gml:boundedBy>
+        <gml:Envelope srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+          <gml:lowerCorner>27.6250 -82.6550</gml:lowerCorner>
+          <gml:upperCorner>27.6250 -82.6550</gml:upperCorner>
+        </gml:Envelope>
+      </gml:boundedBy>
+      <om:samplingTime>
+        <gml:TimePeriod>
+          <gml:beginPosition>2012-02-22T00:01:00Z</gml:beginPosition>
+          <gml:endPosition>2012-02-22T00:25:00Z</gml:endPosition>
+        </gml:TimePeriod>
+      </om:samplingTime>
+      <om:procedure/>
+      <om:observedProperty/>
+      <om:featureOfInterest>
+        <gml:FeatureCollection>
+          <gml:metaDataProperty>
+            <gml:name codeSpace="http://cf-pcmdi.llnl.gov/documents/cf-conventions/1.6/cf-conventions.html#discrete-sampling-geometries">timeSeriesProfile</gml:name>
+          </gml:metaDataProperty>
+          <gml:location>
+            <gml:Point srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+              <gml:pos>27.6250 -82.6550</gml:pos>
+            </gml:Point>
+          </gml:location>
+        </gml:FeatureCollection>
+      </om:featureOfInterest>
+      <om:result>
+        <swe:DataStream>
+          <swe:DataRecord>
+            <swe:field name="time">
+              <swe:Time definition="http://www.opengis.net/def/property/OGC/0/SamplingTime">
+                <swe:uom xlink:href="http://www.opengis.net/def/uom/ISO-8601/0/Gregorian"/>
+              </swe:Time>
+            </swe:field>
+            <swe:field name="profilePoints">
+              <swe:DataArray>
+                <swe:DataRecord>
+                  <swe:field name="location">
+                    <swe:Vector definition="http://www.opengis.net/def/property/OGC/0/PlatformLocation" referenceFrame="http://www.opengis.net/def/crs/EPSG/0/4979">
+                      <swe:coordinate name="lat">
+                        <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/latitude" axisID="Lat">
+                          <swe:uom code="deg"/>
+                          <swe:value>27.6250</swe:value>
+                        </swe:Quantity>
+                      </swe:coordinate>
+                      <swe:coordinate name="lon">
+                        <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/longitude" axisID="Long">
+                          <swe:uom code="deg"/>
+                          <swe:value>-82.6550</swe:value>
+                        </swe:Quantity>
+                      </swe:coordinate>
+                      <swe:coordinate name="bin_distance">
+                        <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/altitude" axisID="h">
+                          <swe:description>Estimated depths of bins relative to the water surface</swe:description>
+                          <swe:uom code="m"/>
+                          <swe:label>Bin 1</swe:label>
+                          <swe:value>14.90</swe:value>
+                          <swe:label>Bin 2</swe:label>
+                          <swe:value>13.90</swe:value>
+                          <swe:label>Bin 3</swe:label>
+                          <swe:value>12.90</swe:value>
+                          <swe:label>Bin 4</swe:label>
+                          <swe:value>11.90</swe:value>
+                          <swe:label>Bin 5</swe:label>
+                          <swe:value>10.90</swe:value>
+                          <swe:label>Bin 6</swe:label>
+                          <swe:value>9.90</swe:value>
+                          <swe:label>Bin 7</swe:label>
+                          <swe:value>8.90</swe:value>
+                          <swe:label>Bin 8</swe:label>
+                          <swe:value>7.90</swe:value>
+                          <swe:label>Bin 9</swe:label>
+                          <swe:value>6.90</swe:value>
+                          <swe:label>Bin 10</swe:label>
+                          <swe:value>5.90</swe:value>  
+                          <swe:label>Bin 11</swe:label>
+                          <swe:value>4.90</swe:value>
+                          <swe:label>Bin 12</swe:label>
+                          <swe:value>3.90</swe:value>
+                          <swe:label>Bin 13</swe:label>
+                          <swe:value>2.90</swe:value>
+                          <swe:label>Bin 14</swe:label>
+                          <swe:value>1.90</swe:value>
+                          <swe:label>Bin 15</swe:label>
+                          <swe:value>0.90</swe:value>
+                        </swe:Quantity>
+                      </swe:coordinate>
+                    </swe:Vector>
+                  </swe:field>
+                  <swe:field name="sensor_depth">
+                    <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/depth">
+                      <swe:uom code="m"/>
+                      <swe:value>missing</swe:value>
+                    </swe:Quantity>
+                  </swe:field>
+                  <swe:field name="bin_number">
+                    <swe:Quantity definition="Needs a defnition bin_number">
+                    </swe:Quantity>
+                  </swe:field>
+                  <swe:field name="attitude">
+                    <swe:Vector definition="http://www.opengis.net/def/property/OGC/0/PlatformOrientation" referenceFrame="http://www.opengis.net/def/crs/OGC/0/ENU">
+                      <swe:coordinate name="platform_orientation">
+                        <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/platform_orientation" axisID="Z">
+                          <swe:uom code="deg"/>
+                        </swe:Quantity>
+                      </swe:coordinate>
+                      <swe:coordinate name="platform_pitch_angle">
+                        <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/platform_pitch_angle" axisID="X">
+                          <swe:uom code="deg"/>
+                        </swe:Quantity>
+                      </swe:coordinate>
+                      <swe:coordinate name="platform_roll_angle">
+                        <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/platform_roll_angle" axisID="Y">
+                          <swe:uom code="deg"/>
+                        </swe:Quantity>
+                      </swe:coordinate>
+                    </swe:Vector>
+                  </swe:field>
+                  <swe:field name="sea_water_temperature">
+                    <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/sea_water_temperature">
+                      <swe:uom code="Cel"/>
+                    </swe:Quantity>
+                  </swe:field>
+                  <swe:field name="direction_of_sea_water_velocity">
+                    <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/direction_of_sea_water_velocity">
+                      <swe:uom code="deg"/>
+                    </swe:Quantity>
+                  </swe:field>
+                  <swe:field name="sea_water_speed">
+                    <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/sea_water_speed">
+                      <swe:uom code="cm/s"/>
+                    </swe:Quantity>
+                  </swe:field>
+                </swe:DataRecord>
+              </swe:DataArray>
+            </swe:field>
+          </swe:DataRecord>
+          <swe:encoding>
+            <swe:TextEncoding blockSeparator="\n" tokenSeparator=","/>
+          </swe:encoding>
+          <swe:values>
+            2012-02-22T00:01:00Z,1,247.82,-1.04,5.45,19.22,224.0,7.4
+            2012-02-22T00:01:00Z,2,247.82,-1.04,5.45,19.22,221.0,7.8
+            2012-02-22T00:01:00Z,3,247.82,-1.04,5.45,19.22,226.0,8.0
+            2012-02-22T00:01:00Z,4,247.82,-1.04,5.45,19.22,230.0,9.8
+            2012-02-22T00:01:00Z,5,247.82,-1.04,5.45,19.22,230.0,11.7
+            2012-02-22T00:01:00Z,6,247.82,-1.04,5.45,19.22,230.0,13.0
+            2012-02-22T00:01:00Z,7,247.82,-1.04,5.45,19.22,245.0,16.8
+            2012-02-22T00:01:00Z,8,247.82,-1.04,5.45,19.22,246.0,20.4
+            2012-02-22T00:01:00Z,9,247.82,-1.04,5.45,19.22,252.0,24.0
+            2012-02-22T00:01:00Z,10,247.82,-1.04,5.45,19.22,251.0,27.6
+            2012-02-22T00:01:00Z,11,247.82,-1.04,5.45,19.22,246.0,30.4
+            2012-02-22T00:01:00Z,12,247.82,-1.04,5.45,19.22,240.0,30.8
+            2012-02-22T00:01:00Z,13,247.82,-1.04,5.45,19.22,116.0,18.9
+            2012-02-22T00:01:00Z,14,247.82,-1.04,5.45,19.22,130.0,19.4
+            2012-02-22T00:01:00Z,15,247.82,-1.04,5.45,19.22,225.0,37.0
+            
+            2012-02-22T00:07:00Z,1,247.83,-1.04,5.46,19.23,216.0,5.2
+            2012-02-22T00:07:00Z,2,247.83,-1.04,5.46,19.23,213.0,5.6
+            2012-02-22T00:07:00Z,3,247.83,-1.04,5.46,19.23,226.0,6.3
+            2012-02-22T00:07:00Z,4,247.83,-1.04,5.46,19.23,222.0,8.0
+            2012-02-22T00:07:00Z,5,247.83,-1.04,5.46,19.23,228.0,9.9
+            2012-02-22T00:07:00Z,6,247.83,-1.04,5.46,19.23,236.0,11.9
+            2012-02-22T00:07:00Z,7,247.83,-1.04,5.46,19.23,241.0,13.7
+            2012-02-22T00:07:00Z,8,247.83,-1.04,5.46,19.23,246.0,18.1
+            2012-02-22T00:07:00Z,9,247.83,-1.04,5.46,19.23,250.0,20.6
+            2012-02-22T00:07:00Z,10,247.83,-1.04,5.46,19.23,253.0,24.0
+            2012-02-22T00:07:00Z,11,247.83,-1.04,5.46,19.23,248.0,27.4
+            2012-02-22T00:07:00Z,12,247.83,-1.04,5.46,19.23,241.0,27.3
+            2012-02-22T00:07:00Z,13,247.83,-1.04,5.46,19.23,137.0,27.1
+            2012-02-22T00:07:00Z,14,247.83,-1.04,5.46,19.23,124.0,26.0
+            2012-02-22T00:07:00Z,15,247.83,-1.04,5.46,19.23,209.0,27.5
+            
+            2012-02-22T00:13:00Z,1,247.83,-1.04,5.46,19.23,217.0,4.4
+            2012-02-22T00:13:00Z,2,247.83,-1.04,5.46,19.23,219.0,4.6
+            2012-02-22T00:13:00Z,3,247.83,-1.04,5.46,19.23,216.0,6.2
+            2012-02-22T00:13:00Z,4,247.83,-1.04,5.46,19.23,225.0,8.5
+            2012-02-22T00:13:00Z,5,247.83,-1.04,5.46,19.23,224.0,8.7
+            2012-02-22T00:13:00Z,6,247.83,-1.04,5.46,19.23,238.0,10.3
+            2012-02-22T00:13:00Z,7,247.83,-1.04,5.46,19.23,241.0,11.9
+            2012-02-22T00:13:00Z,8,247.83,-1.04,5.46,19.23,247.0,14.1
+            2012-02-22T00:13:00Z,9,247.83,-1.04,5.46,19.23,254.0,16.8
+            2012-02-22T00:13:00Z,10,247.83,-1.04,5.46,19.23,253.0,20.1
+            2012-02-22T00:13:00Z,11,247.83,-1.04,5.46,19.23,249.0,24.0
+            2012-02-22T00:13:00Z,12,247.83,-1.04,5.46,19.23,243.0,25.2
+            2012-02-22T00:13:00Z,13,247.83,-1.04,5.46,19.23,125.0,22.2
+            2012-02-22T00:13:00Z,14,247.83,-1.04,5.46,19.23,109.0,27.3
+            2012-02-22T00:13:00Z,15,247.83,-1.04,5.46,19.23,225.0,19.7
+            
+            2012-02-22T00:19:00Z,1,247.83,-1.04,5.45,19.24,209.0,4.5
+            2012-02-22T00:19:00Z,2,247.83,-1.04,5.45,19.24,220.0,5.9
+            2012-02-22T00:19:00Z,3,247.83,-1.04,5.45,19.24,218.0,6.8
+            2012-02-22T00:19:00Z,4,247.83,-1.04,5.45,19.24,218.0,7.1
+            2012-02-22T00:19:00Z,5,247.83,-1.04,5.45,19.24,226.0,7.2
+            2012-02-22T00:19:00Z,6,247.83,-1.04,5.45,19.24,232.0,8.6
+            2012-02-22T00:19:00Z,7,247.83,-1.04,5.45,19.24,247.0,9.3
+            2012-02-22T00:19:00Z,8,247.83,-1.04,5.45,19.24,250.0,11.0
+            2012-02-22T00:19:00Z,9,247.83,-1.04,5.45,19.24,259.0,15.1
+            2012-02-22T00:19:00Z,10,247.83,-1.04,5.45,19.24,257.0,17.4
+            2012-02-22T00:19:00Z,11,247.83,-1.04,5.45,19.24,246.0,22.2
+            2012-02-22T00:19:00Z,12,247.83,-1.04,5.45,19.24,239.0,24.3
+            2012-02-22T00:19:00Z,13,247.83,-1.04,5.45,19.24,126.0,16.5
+            2012-02-22T00:19:00Z,14,247.83,-1.04,5.45,19.24,129.0,13.4
+            2012-02-22T00:19:00Z,15,247.83,-1.04,5.45,19.24,238.0,23.7
+            
+            2012-02-22T00:25:00Z,1,247.82,-1.04,5.45,19.24,219.0,4.9
+            2012-02-22T00:25:00Z,2,247.82,-1.04,5.45,19.24,209.0,5.2
+            2012-02-22T00:25:00Z,3,247.82,-1.04,5.45,19.24,215.0,5.7
+            2012-02-22T00:25:00Z,4,247.82,-1.04,5.45,19.24,225.0,5.6
+            2012-02-22T00:25:00Z,5,247.82,-1.04,5.45,19.24,244.0,6.4
+            2012-02-22T00:25:00Z,6,247.82,-1.04,5.45,19.24,249.0,7.4
+            2012-02-22T00:25:00Z,7,247.82,-1.04,5.45,19.24,262.0,9.2
+            2012-02-22T00:25:00Z,8,247.82,-1.04,5.45,19.24,262.0,12.5
+            2012-02-22T00:25:00Z,9,247.82,-1.04,5.45,19.24,261.0,14.6
+            2012-02-22T00:25:00Z,10,247.82,-1.04,5.45,19.24,257.0,17.8
+            2012-02-22T00:25:00Z,11,247.82,-1.04,5.45,19.24,241.0,19.3
+            2012-02-22T00:25:00Z,12,247.82,-1.04,5.45,19.24,216.0,20.5
+            2012-02-22T00:25:00Z,13,247.82,-1.04,5.45,19.24,154.0,17.2
+            2012-02-22T00:25:00Z,14,247.82,-1.04,5.45,19.24,180.0,20.3
+            2012-02-22T00:25:00Z,15,247.82,-1.04,5.45,19.24,207.0,19.7         
+          </swe:values>
+        </swe:DataStream>
+      </om:result>
+    </om:Observation>
+  </om:member>  
+</om:ObservationCollection>

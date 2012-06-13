@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<om:ObservationCollection xmlns:om="http://www.opengis.net/om/1.0" xmlns:gml="http://www.opengis.net/gml" xmlns:swe="http://www.opengis.net/swe/1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/om/1.0 http://schemas.opengis.net/om/1.0.0/observation.xsd">
+  <gml:metaDataProperty xlink:title="disclaimer">
+    <gml:GenericMetaData>
+      <gml:description>These values are generated using the most recent set of Harmonic Constants and Datums available for the station. Harmonic Constants are updated on a frequent basis to ensure the most accurate tidal predictions possible and tidal datums are updated based on a tidal epoch. The electronic tide predictions may not match the officially published Tide Tables, which are compiled in advance and released annually. Please see the following websites for more information: Harmonic Constituents http://www.tidesandcurrents.noaa.gov/station_retrieve.shtml?type=Harmonic+Constituents, Tide Predictions http://tidesandcurrents.noaa.gov/tide_pred.html and Datums http://tidesandcurrents.noaa.gov/datum_options.html.</gml:description>
+    </gml:GenericMetaData>
+  </gml:metaDataProperty>
+  <om:member>
+    <om:Observation>
+      <gml:description>High low tide predictions at a point at a series of times</gml:description>
+      <gml:name>NOAA.NOS.CO-OPS predictions at station ID 1611400</gml:name>
+      <gml:boundedBy>
+        <gml:Envelope srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+          <gml:lowerCorner>21.9544 -159.3561</gml:lowerCorner>
+          <gml:upperCorner>21.9544 -159.3561</gml:upperCorner>
+        </gml:Envelope>
+      </gml:boundedBy>
+      <om:samplingTime>
+        <gml:TimePeriod>
+          <gml:beginPosition>2012-03-20T00:22:00Z</gml:beginPosition>
+          <gml:endPosition>2012-03-22T19:31:00Z</gml:endPosition>
+        </gml:TimePeriod>
+      </om:samplingTime>
+      <om:procedure/>
+      <om:observedProperty/>
+      <om:featureOfInterest>
+        <gml:FeatureCollection>
+          <gml:metaDataProperty>
+            <gml:name codeSpace="http://cf-pcmdi.llnl.gov/documents/cf-conventions/1.6/cf-conventions.html#discrete-sampling-geometries">timeSeries</gml:name>
+          </gml:metaDataProperty>
+          <gml:location>
+            <gml:Point srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+              <gml:pos>21.9544 -159.3561</gml:pos>
+            </gml:Point>
+          </gml:location>
+        </gml:FeatureCollection>
+      </om:featureOfInterest>
+      <om:result>
+        <swe:DataStream definition="timeSeries">
+          <swe:field name="time">
+            <swe:Time definition="http://www.opengis.net/def/property/OGC/0/SamplingTime">
+              <swe:uom xlink:href="http://www.opengis.net/def/uom/ISO-8601/0/Gregorian"/>
+            </swe:Time>
+          </swe:field>
+          <swe:field name="location">
+            <swe:Vector definition="http://www.opengis.net/def/property/OGC/0/PlatformLocation" referenceFrame="http://www.opengis.net/def/crs/EPSG/0/4979">
+              <swe:coordinate name="lat">
+                <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/latitude" axisID="Lat">
+                  <swe:uom code="deg"/>
+                  <swe:value>21.9544</swe:value>
+                </swe:Quantity>
+              </swe:coordinate>
+              <swe:coordinate name="lon">
+                <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/longitude" axisID="Long">
+                  <swe:uom code="deg"/>
+                  <swe:value>-159.3561</swe:value>
+                </swe:Quantity>
+              </swe:coordinate>
+            </swe:Vector>
+          </swe:field>
+          <swe:field name="sea_surface_height_amplitude_due_to_equilibrium_ocean_tide">
+            <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/sea_surface_height_amplitude_due_to_equilibrium_ocean_tide">
+              <swe:uom code="feet"/>
+              <swe:quality>
+                <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/vertical_datum">
+                   <swe:label>urn:ioos:def:datum:noaa::STND</swe:label>
+                   <swe:uom code="feet"/>
+                   <swe:value>0.000</swe:value>
+                </swe:Quantity>
+              </swe:quality>
+            </swe:Quantity>
+          </swe:field>
+          <swe:field name="type">
+            <swe:Text definition="Needs a defnition type">
+               <swe:label>High Low Tide Predictions Type</swe:label>
+            </swe:Text>
+          </swe:field>
+          <swe:encoding>
+            <swe:TextEncoding blockSeparator="\n" tokenSeparator=","/>
+          </swe:encoding>
+          <swe:values>
+            2012-03-20T00:22:00Z,3.400,H
+            2012-03-20T05:59:00Z,2.300,L
+            2012-03-20T12:33:00Z,3.800,H
+            2012-03-20T18:50:00Z,2.300,L
+            2012-03-21T00:58:00Z,3.500,H
+            2012-03-21T06:42:00Z,2.400,L
+            2012-03-21T13:01:00Z,3.700,H
+            2012-03-21T19:10:00Z,2.200,L
+            2012-03-22T01:32:00Z,3.700,H
+            2012-03-22T07:23:00Z,2.400,L
+            2012-03-22T13:28:00Z,3.600,H
+            2012-03-22T19:31:00Z,2.200,L
+          </swe:values>
+        </swe:DataStream>
+      </om:result>
+    </om:Observation>
+  </om:member>
+  <om:member>
+    <om:Observation>
+      <gml:description>High low tide predictions at a point at a series of times</gml:description>
+      <gml:name>NOAA.NOS.CO-OPS predictions at station ID 1612340</gml:name>
+      <gml:boundedBy>
+        <gml:Envelope srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+          <gml:lowerCorner>21.3067 -157.8670</gml:lowerCorner>
+          <gml:upperCorner>21.3067 -157.8670</gml:upperCorner>
+        </gml:Envelope>
+      </gml:boundedBy>
+      <om:samplingTime>
+        <gml:TimePeriod>
+          <gml:beginPosition>2012-03-20T00:43:00Z</gml:beginPosition>
+          <gml:endPosition>2012-03-22T19:58:00Z</gml:endPosition>
+        </gml:TimePeriod>
+      </om:samplingTime>
+      <om:procedure/>
+      <om:observedProperty/>
+      <om:featureOfInterest>
+        <gml:FeatureCollection>
+          <gml:metaDataProperty>
+            <gml:name codeSpace="http://cf-pcmdi.llnl.gov/documents/cf-conventions/1.6/cf-conventions.html#discrete-sampling-geometries">timeSeries</gml:name>
+          </gml:metaDataProperty>
+          <gml:location>
+            <gml:Point srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+              <gml:pos>21.3067 -157.8670</gml:pos>
+            </gml:Point>
+          </gml:location>
+        </gml:FeatureCollection>
+      </om:featureOfInterest>
+      <om:result>
+        <swe:DataStream definition="timeSeries">
+          <swe:field name="time">
+            <swe:Time definition="http://www.opengis.net/def/property/OGC/0/SamplingTime">
+              <swe:uom xlink:href="http://www.opengis.net/def/uom/ISO-8601/0/Gregorian"/>
+            </swe:Time>
+          </swe:field>
+          <swe:field name="location">
+            <swe:Vector definition="http://www.opengis.net/def/property/OGC/0/PlatformLocation" referenceFrame="http://www.opengis.net/def/crs/EPSG/0/4979">
+              <swe:coordinate name="lat">
+                <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/latitude" axisID="Lat">
+                  <swe:uom code="deg"/>
+                  <swe:value>21.3067</swe:value>
+                </swe:Quantity>
+              </swe:coordinate>
+              <swe:coordinate name="lon">
+                <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/longitude" axisID="Long">
+                  <swe:uom code="deg"/>
+                  <swe:value>-157.8670</swe:value>
+                </swe:Quantity>
+              </swe:coordinate>
+            </swe:Vector>
+          </swe:field>
+          <swe:field name="sea_surface_height_amplitude_due_to_equilibrium_ocean_tide">
+            <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/sea_surface_height_amplitude_due_to_equilibrium_ocean_tide">
+              <swe:uom code="feet"/>
+              <swe:quality>
+                <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/vertical_datum">
+                   <swe:label>urn:ioos:def:datum:noaa::STND</swe:label>
+                   <swe:uom code="feet"/>
+                   <swe:value>0.000</swe:value>
+                </swe:Quantity>
+              </swe:quality>
+            </swe:Quantity>
+          </swe:field>
+          <swe:field name="type">
+            <swe:Text definition="Needs a defnition type">
+               <swe:label>High Low Tide Predictions Type</swe:label>
+            </swe:Text>
+          </swe:field>
+          <swe:encoding>
+            <swe:TextEncoding blockSeparator="\n" tokenSeparator=","/>
+          </swe:encoding>
+          <swe:values>
+            2012-03-20T00:43:00Z,5.000,H
+            2012-03-20T06:26:00Z,3.800,L
+            2012-03-20T12:47:00Z,5.400,H
+            2012-03-20T19:13:00Z,3.700,L
+            2012-03-21T01:17:00Z,5.100,H
+            2012-03-21T07:10:00Z,3.800,L
+            2012-03-21T13:17:00Z,5.300,H
+            2012-03-21T19:36:00Z,3.700,L
+            2012-03-22T01:50:00Z,5.300,H
+            2012-03-22T07:51:00Z,3.900,L
+            2012-03-22T13:47:00Z,5.200,H
+            2012-03-22T19:58:00Z,3.700,L
+          </swe:values>
+        </swe:DataStream>
+      </om:result>
+    </om:Observation>
+  </om:member>
+  <om:member>
+    <om:Observation>
+      <gml:description>High low tide predictions at a point at a series of times</gml:description>
+      <gml:name>NOAA.NOS.CO-OPS predictions at station ID 1612480</gml:name>
+      <gml:boundedBy>
+        <gml:Envelope srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+          <gml:lowerCorner>21.4331 -157.7900</gml:lowerCorner>
+          <gml:upperCorner>21.4331 -157.7900</gml:upperCorner>
+        </gml:Envelope>
+      </gml:boundedBy>
+      <om:samplingTime>
+        <gml:TimePeriod>
+          <gml:beginPosition>2012-03-20T05:04:00Z</gml:beginPosition>
+          <gml:endPosition>2012-03-22T18:33:00Z</gml:endPosition>
+        </gml:TimePeriod>
+      </om:samplingTime>
+      <om:procedure/>
+      <om:observedProperty/>
+      <om:featureOfInterest>
+        <gml:FeatureCollection>
+          <gml:metaDataProperty>
+            <gml:name codeSpace="http://cf-pcmdi.llnl.gov/documents/cf-conventions/1.6/cf-conventions.html#discrete-sampling-geometries">timeSeries</gml:name>
+          </gml:metaDataProperty>
+          <gml:location>
+            <gml:Point srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+              <gml:pos>21.4331 -157.7900</gml:pos>
+            </gml:Point>
+          </gml:location>
+        </gml:FeatureCollection>
+      </om:featureOfInterest>
+      <om:result>
+        <swe:DataStream definition="timeSeries">
+          <swe:field name="time">
+            <swe:Time definition="http://www.opengis.net/def/property/OGC/0/SamplingTime">
+              <swe:uom xlink:href="http://www.opengis.net/def/uom/ISO-8601/0/Gregorian"/>
+            </swe:Time>
+          </swe:field>
+          <swe:field name="location">
+            <swe:Vector definition="http://www.opengis.net/def/property/OGC/0/PlatformLocation" referenceFrame="http://www.opengis.net/def/crs/EPSG/0/4979">
+              <swe:coordinate name="lat">
+                <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/latitude" axisID="Lat">
+                  <swe:uom code="deg"/>
+                  <swe:value>21.4331</swe:value>
+                </swe:Quantity>
+              </swe:coordinate>
+              <swe:coordinate name="lon">
+                <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/longitude" axisID="Long">
+                  <swe:uom code="deg"/>
+                  <swe:value>-157.7900</swe:value>
+                </swe:Quantity>
+              </swe:coordinate>
+            </swe:Vector>
+          </swe:field>
+          <swe:field name="sea_surface_height_amplitude_due_to_equilibrium_ocean_tide">
+            <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/sea_surface_height_amplitude_due_to_equilibrium_ocean_tide">
+              <swe:uom code="feet"/>
+              <swe:quality>
+                <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/vertical_datum">
+                   <swe:label>urn:ioos:def:datum:noaa::STND</swe:label>
+                   <swe:uom code="feet"/>
+                   <swe:value>0.000</swe:value>
+                </swe:Quantity>
+              </swe:quality>
+            </swe:Quantity>
+          </swe:field>
+          <swe:field name="type">
+            <swe:Text definition="Needs a defnition type">
+               <swe:label>High Low Tide Predictions Type</swe:label>
+            </swe:Text>
+          </swe:field>
+          <swe:encoding>
+            <swe:TextEncoding blockSeparator="\n" tokenSeparator=","/>
+          </swe:encoding>
+          <swe:values>
+            2012-03-20T05:04:00Z,3.100,L
+            2012-03-20T11:35:00Z,4.900,H
+            2012-03-20T17:56:00Z,3.200,L
+            2012-03-20T23:46:00Z,4.600,H
+            2012-03-21T05:42:00Z,3.200,L
+            2012-03-21T11:57:00Z,4.900,H
+            2012-03-21T18:14:00Z,3.100,L
+            2012-03-22T00:21:00Z,4.700,H
+            2012-03-22T06:17:00Z,3.300,L
+            2012-03-22T12:17:00Z,4.800,H
+            2012-03-22T18:33:00Z,3.000,L
+          </swe:values>
+        </swe:DataStream>
+      </om:result>
+    </om:Observation>
+  </om:member>
+</om:ObservationCollection>

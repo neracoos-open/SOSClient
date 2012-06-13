@@ -1,0 +1,486 @@
+<html>
+<!--
+Author: Eric Bridger ebridger@gmri.org  eric.bridger@gmail.com
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+-->
+<head>
+<title>SOS Parser Demonstration</title>
+
+<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script> 
+<script src="jquery.parseSOSGetObs.js"></script> 
+
+<script type="text/javascript">
+
+
+// Global objects returned by new SOSCapabilities(xml) and new SOSObservation(xml);
+var    sosGetCap = null;
+var    sosGetObs = null;
+
+// make an AJAX request for an XML document using jQuery
+// Even local files must be served from a Web Server
+function loadXML(url, success_function)
+{
+    // clear out prior display results
+    $("#results").text('');
+    $("#metadata").text('');
+    $("#this_url").text('');
+
+    if(!url){
+        return;
+    }
+
+    $("#this_url").append('<b>File Parsed:</b> ' + url);
+
+    url += '?' + new Date().getTime();
+
+    $.ajax({
+        type: "GET",
+        url:  url,
+        dataType: "xml",  // returns an XML DOM object
+        success: success_function,
+        error: function () {alert("AJAX ERROR for " + url ); }
+    });
+} // end loadXML
+
+// AJAX success callback function
+function parseSOSGetCap(xml, status)
+{
+
+    if(status !== 'success'){
+        alert("ERROR");
+        return;
+    }
+
+    sosGetCap = new SOSCapabilities(xml);
+
+    if(sosGetCap.type === 'EXCEPTION'){
+        alert('SOS Exception; ' + sosGetCap.exception_error);
+        return;
+    }
+    alert("GetCapabilities Parsed");
+    displayOfferings();
+    displayProperties();
+}
+
+// AJAX success callback function
+function parseSOSGetObs(xml, status)
+{
+
+    if(status !== 'success'){
+        alert("ERROR");
+        return;
+    }
+
+    sosGetObs = new SOSObservation(xml);
+
+    if(sosGetObs.type === 'EXCEPTION'){
+        alert('SOS Exception: ' + sosGetObs.exception_error);
+        return;
+    }else{
+        //alert('SOS GetObs Loaded');
+    }
+}
+
+//////////////////////////////////////////////////
+//  GetCapabilities routines
+///////////////////////////////////////////////////
+
+function displayGetUrl(type)
+{
+    
+    $("#results").text('');
+    var html = '';
+
+    var sl = document.getElementById("offering_select");
+    var i = sl.selectedIndex;
+    var offering_name = sl.options[i].value;
+
+    sl = document.getElementById("property_select");
+    i = sl.selectedIndex;
+    var property = sl.options[i].value;
+
+    var offer = sosGetCap.searchOfferings(offering_name);
+    var url = ''
+    if(type === 'ALL'){ // ALL means per offering
+        html += '<b>DescribeSensor</b><br />';
+        url = offer.getDescribeSensorUrl();
+        html += decodeURIComponent(url) + '<br />';
+        html += '<a target="_new" href="' +url + '">XML in new window</a><br />';
+        for(var i = 0; i < offer.properties.length; i++){
+            var prop = offer.properties[i];
+            url = offer.getObsUrl(prop);
+            html += '<b>GetObservation</b><br />';
+            html += decodeURIComponent(url) + '<br />';
+            html += '<a target="_new" href="' +url + '">XML in new window</a><br />';
+        }
+    }else{
+        html += '<b>DescribeSensor</b><br />';
+        url = offer.getDescribeSensorUrl();
+        html += decodeURIComponent(url) + '<br />';
+        html += '<a target="_new" href="' +url + '">XML in new window</a><br />';
+        url = offer.getObsUrl(property);
+        html += '<b>GetObservation</b><br />';
+        html += decodeURIComponent(url) + '<br />';
+        html += '<a target="_new" href="' +url + '">XML in new window</a><br />';
+    }
+
+
+
+    $("#results").append(html);
+}
+
+function displayOfferings()
+{
+    $("#offerings").text('');
+    var html = '<b>Offerings</b><br />';
+    html += '<select id="offering_select" onChange="displayProperties(this);">';
+
+    for(var i = 0; i < sosGetCap.offerings.length; i++){
+        html += '<option value="' + sosGetCap.offerings[i].name + '">' + sosGetCap.offerings[i].shortName + '</option>' + "\n";
+    };
+
+    html += '</select>';
+
+    $("#offerings").append(html);
+}
+
+function displayProperties(sl)
+{
+    $("#results").text('');
+    $("#properties").text('');
+    var offer;
+    if(sl){
+        var i = sl.selectedIndex;
+        var offering_name = sl.options[i].value;
+        offer = sosGetCap.searchOfferings(offering_name);
+    }else{
+        offer = sosGetCap.offerings[0];
+    }
+
+    var html = '<b>Observed Properties</b><br />';
+    html += '<select id="property_select">';
+
+    offer.properties.sort();
+    for(var i = 0; i < offer.properties.length; i++){
+        html += '<option value="' + offer.properties[i] + '">' + offer.properties[i] + '</option>' + "\n";
+    };
+
+    html += '</select>';
+
+    $("#properties").append(html);
+    $("#url").text('');
+    html = '<b>Display</b><br /><input type="button" value="This property URL" onClick="displayGetUrl();"><br />';
+    html += "<input type='button' value='All URLs for this offering' onClick='displayGetUrl(\"ALL\");'><br />";
+    $("#url").append(html);
+
+    $("#offering_count").text('');
+    html = '<b>Offering Count</b><br />';
+    html += sosGetCap.number_of_offerings;
+    $("#offering_count").append(html);
+}
+
+// using JSON.stringify() on our returned objects.
+// The GetCaps object has a circular references in the Offering object: Offering.parent which points to the parent.
+// This function return undefined for the parent member
+
+function fixRecursion(k,v)
+{
+    if(k === 'parent'){
+        return undefined;
+    }
+    return v;
+}
+
+function displayJSON(type)
+{
+    if(! sosGetCap){
+        alert("Load a GetCap XML first");
+        return;
+    }
+    var html = '';
+    html += '<pre>';
+    var of;
+    $("#results").text('');
+    if(type == 'ALL'){
+        html += JSON.stringify(sosGetCap, fixRecursion);
+    }
+    if(type === 'CURRENT'){
+        var sl = document.getElementById("offering_select");
+        var i = sl.selectedIndex;
+        var offering_name = sl.options[i].value;
+        of = sosGetCap.searchOfferings(offering_name);
+        html += JSON.stringify(of, fixRecursion);
+    }
+
+    html += '</pre>';
+    $("#results").append(html);
+}
+
+function displayGetCapMeta(type)
+{
+    if(! sosGetCap){
+        alert("Load a GetCap XML first");
+        return;
+    }
+    var html = '';
+    $("#results").text('');
+
+    html = '<table cellpadding="4" border="1"><tr>';
+    for( var name in sosGetCap){
+        if(typeof(sosGetCap[name]) == 'string' || typeof(sosGetCap[name]) == 'number'){
+            html += '<tr><td>' + name + '</td><td>' + sosGetCap[name]  + '</td></tr>'; 
+        }else if(typeof(sosGetCap[name]) == 'function'){
+            html += '<tr><td>' + name + '()</td><td>function</td></tr>'; 
+        }else if(typeof(sosGetCap[name]) == 'undefined'){
+            html += '<tr><td>' + name + '</td><td>' + sosGetCap[name]  + '</td></tr>'; 
+        }else{
+            html += '<tr><td>' + name + '[]</td><td>array</td></tr>'; 
+        }
+    }
+
+    var of;
+    if(type === 'ALL'){
+        while( of = sosGetCap.next()){
+            html += '<tr bgcolor="yellow"><td colspan="2">Offering</td></tr>'; 
+            for( var name in of){
+                if(typeof(of[name]) == 'string' || typeof(of[name]) == 'number'){
+                    html += '<tr><td>' + name + '</td><td>' + of[name]  + '</td></tr>'; 
+                }
+            }
+        }
+        html += '</table>';
+    } // end if type ALL
+    if(type === 'CURRENT'){
+        var sl = document.getElementById("offering_select");
+        var i = sl.selectedIndex;
+        var offering_name = sl.options[i].value;
+        of = sosGetCap.searchOfferings(offering_name);
+        html += '<tr bgcolor="yellow"><td colspan="2">Offering</td></tr>'; 
+        for( var name in of){
+            if(typeof(of[name]) == 'string' || typeof(of[name]) == 'number'){
+                html += '<tr><td>' + name + '</td><td>' + of[name]  + '</td></tr>'; 
+            }
+        }
+    }
+
+    $("#results").append(html);
+}
+
+//////////////////////////////////////////////////
+//  GetObservation routines
+///////////////////////////////////////////////////
+
+// The sosGetObs returned has 3 methods: metadataHTML(), obsHTML(), and CSV()
+function displayHTML(type)
+{
+    // clear out prior display results
+    // jQuery shorthand for: document.getElementById("metadata").innerHTML = '';
+    $("#metadata").text('');
+    $("#results").text('');
+
+    if(! sosGetObs || sosGetObs.type == 'EXCEPTION'){
+        alert("No SOS GetObs yet");
+        return;
+    }
+    var html = sosGetObs.metadataHTML();
+    if(type === 'metadata'){
+        $("#metadata").append(html);
+        return;
+    }
+    if(type === 'all'){
+        $("#metadata").append(html);
+    }
+
+    html = sosGetObs.obsHTML();
+    $("#results").append(html);
+}
+
+function displayFields()
+{
+    if(! sosGetObs || sosGetObs.type == 'EXCEPTION'){
+        alert("No SOS GetObs yet");
+        return;
+    }
+    $("#metadata").text('');
+    $("#results").text('');
+
+    var html = '';
+    for(var j = 0; j < sosGetObs.members.length; j++){
+        var member = sosGetObs.members[j];
+
+        html += '<b>' + member.metadata.name + '</b></br>';
+        html += '<table cellpadding="4" border="1"><tr>';
+        html += '<tr><th>fld_name</th><th>name</th><th>definition</th><th>uom</th><th>Global Value</th><th>Quality Info</th></tr>';
+        for(var i = 0; i < member.fields.length; i++){
+            var fld = member.fields[i];
+            if(fld.name == 'swe:DataChoice'){
+                html += '<tr bgcolor="yellow"><td colspan="4">' + fld.name + '</td></tr>';
+                for( h = 0; h < fld.dc_choices.length; h++){
+                    dc_name = fld.dc_choices[h];
+                    html += '<tr><td colspan="4">' + dc_name + '</td></tr>';
+                    for(var k = 0; k < member.dc_fields[dc_name].length; k++){
+                        var dc_fld = member.dc_fields[dc_name][k];
+                        html += '<tr><td>' + dc_fld.name + '</td><td>' + dc_fld.definition + '</td><td>' + dc_fld.uom + '</td><td>' + dc_fld.global_value + '</td>';
+                        if(dc_fld.quality){
+                            html += '<td>' + dc_fld.quality.name + '<br />' + dc_fld.quality.definition + '<br />';
+                            html += dc_fld.quality.label + '<br />' + dc_fld.quality.definition + '<br />';
+                            html += 'uom: ' + dc_fld.quality.uom + '<br />value: ' + dc_fld.quality.global_value;
+                        }
+                        html += '</td></tr>';
+                    }
+                }
+         }else{
+               html += '<tr><td>' + fld.fld_name + '</td><td>' + fld.name + '</td><td>' + fld.definition + '</td><td>' + fld.uom + '</td><td>' + fld.global_value + '</td>';
+                if(fld.quality){
+                    html += '<td>' + fld.quality.name + '<br />' + fld.quality.definition + '<br />';
+                    html += fld.quality.label + '<br />' + fld.quality.definition + '<br />';
+                    html += 'uom: ' + fld.quality.uom + '<br />value: ' + fld.quality.global_value;
+                }else{
+                    html += '<td>';
+                }
+                html += '</td></tr>';
+
+            }
+        }
+        html += '</table><hr>';
+
+    } // end for members[j]
+
+    $("#metadata").append(html);
+
+}
+
+// Really we need a per memeber display:
+function displayDataChoiceFields()
+{
+    if(! sosGetObs || sosGetObs.type == 'EXCEPTION'){
+        alert("No SOS GetObs yet");
+        return;
+    }
+    $("#metadata").text('');
+    $("#results").text('');
+
+    var html = '';
+    for(var j = 0; j < sosGetObs.members.length; j++){
+        var member = sosGetObs.members[j];
+
+        html += '<b>' + member.metadata.name + '</b></br>';
+        html += '<table cellpadding="4" border="1"><tr>';
+        html += '<tr><th>name</th><th>definition</th><th>uom</th><th>Global Value</th></tr>';
+        for(var i = 0; i < member.fields.length; i++){
+            var fld = member.fields[i];
+            if(fld.definition == 'swe:DataChoice'){
+                html += '<tr bgcolor="yellow"><td>' + fld.name + '</td><td>' + fld.definition + '</td><td>label: ' + fld.uom + '</td><td></td></tr>';
+                for(var k = 0; k < member.dc_fields[fld.name].length; k++){
+                    var dc_fld = member.dc_fields[fld.name][k];
+                    html += '<tr><td>' + dc_fld.name + '</td><td>' + dc_fld.definition + '</td><td>' + dc_fld.uom + '</td><td>' + dc_fld.global_value + '</td></tr>';
+                }
+            }else{
+                html += '<tr><td>' + fld.name + '</td><td>' + fld.definition + '</td><td>' + fld.uom + '</td><td>' + fld.global_value + '</td></tr>';
+            }
+        }
+        html += '</table><hr>';
+
+    } // end for members[j]
+
+    $("#metadata").append(html);
+
+}
+
+function displayObsJSON()
+{
+    // clear out prior display results
+    $("#metadata").text('');
+    $("#results").text('');
+
+    if(! sosGetObs || sosGetObs.type == 'EXCEPTION'){
+        alert("No SOS GetObs yet");
+        return;
+    }
+    var csv = '<pre>' +  JSON.stringify(sosGetObs) + '</pre>';
+    $("#results").append(csv);
+}
+
+</script>
+
+</head>
+<body>
+<h3>SOS IOOS GetObservation Profiles (CF Discrete Sampling) Parser Examples</h3>
+<p> Load a GetObservation Examples first.</p>
+<p> See: <a href="http://code.google.com/p/ioostech/source/browse/#svn%2Ftrunk%2Ftemplates%2F1.0">http://code.google.com/p/ioostech/source/browse/#svn%2Ftrunk%2Ftemplates%2F1.0</a> </p>
+<i> Note: These example files must be served from a web server due to Javascript / AJAX restrictions on client access to the local file system.<br />
+For a truly functional SOS parser a server based proxy (e.g. proxy.php) must be used to access remote SOS services.
+</i>
+<form>
+<table>
+<tr> <th colspan="3">GetObservation Examples</th></tr>
+<tr> <td>IOOS SOS Profile Templates SWE 1.0</td><td>C0-OPS Templates</td><td>Other Examples</td></tr>
+<tr>
+<td valign="top">
+<!-- Template 1.0 -->
+<select id="templates" onChange="loadXML(this.value, parseSOSGetObs)">
+<option value=""> Select File </option>
+<option value="xml/templates1.0/point.xml"> point.xml</option>
+<option value="xml/templates1.0/flat_point.xml"> flat_point.xml</option>
+<option value="xml/templates1.0/point-MultiObservations.xml"> point-MultiObservations.xml</option>
+<option value="xml/templates1.0/profile.xml"> profile.xml</option>
+<option value="xml/templates1.0/profileWithVDatum.xml"> profileWithVDatum.xml</option>
+<option value="xml/templates1.0/timeSeries-MultipleSensor.xml"> timeSeries-MultipleSensor.xml</option>
+<option value="xml/templates1.0/timeSeries-MultipleSensorWithVDatum.xml"> timeSeries-MultipleSensorWithVDatum.xml</option>
+<option value="xml/templates1.0/timeSeries-SingleSensor.xml"> timeSeries-SingleSensor.xml</option>
+<option value="xml/templates1.0/timeSeriesProfile.xml"> timeSeriesProfile.xml</option>
+<option value="xml/templates1.0/trajectory.xml"> trajectory.xml</option>
+<option value="xml/templates1.0/trajectoryProfile.xml"> trajectoryProfile.xml</option>
+
+</select>
+</td>
+<td valign="top">
+<!-- CO-OPS -->
+<select id="CO-OPS" onChange="loadXML(this.value, parseSOSGetObs)">
+<option value=""> Select File </option>
+<option value="xml/CO-OPS/Air_Temperature_latest.xml"> Air_Temperature_latest.xml</option>
+<option value="xml/CO-OPS/Currents_point_latest.xml"> Currents_point_latest.xml</option>
+<option value="xml/CO-OPS/Wind_latest.xml"> Wind_latest.xml</option>
+<option value="xml/CO-OPS/Water_Level_six_min_latest.xml"> Water_Level_six_min_latest.xml</option>
+<option value=""> --timeSeries-- </option>
+<option value="xml/CO-OPS/Currents_point_collection_timeseries.xml"> Currents_point_collection_timeseries.xml</option>
+<option value="xml/CO-OPS/Currents_profile_collection_timeseries.xml"> Currents_profile_collection_timeseries.xml</option>
+<option value="xml/CO-OPS/Water_LeveL_six_min_collection_timeseries.xml"> Water_LeveL_six_min_collection_timeseries.xml</option>
+<option value="xml/CO-OPS/Water_Level_one_min_timeseries.xml"> Water_Level_one_min_timeseries.xml</option>
+<option value="xml/CO-OPS/High_Low_Predictions_collection_timeseries.xml"> High_Low_Predictions_collection_timeseries.xml</option>
+<option value=""> --timeSeriesProfile-- </option>
+<option value="xml/CO-OPS/Currents_profile_latest.xml"> Currents_profile_latest.xml</option>
+<option value="xml/CO-OPS/Currents_profile_timeseries_downward_looking.xml"> Currents_profile_timeseries_downward_looking.xml</option>
+<option value="xml/CO-OPS/Currents_profile_timeseries_sideways_looking.xml"> Currents_profile_timeseries_sideways_looking.xml</option>
+<option value="xml/CO-OPS/Hourly_Tide_Predictions_timeseries.xml"> Hourly_Tide_Predictions_timeseries.xml</option>
+</select>
+</td>
+<td valign="top">
+<!-- OOSTethys -->
+<select id="OOSTethys" onChange="loadXML(this.value, parseSOSGetObs)">
+<option value=""> Select File </option>
+<option value="xml/oostethys/oostethys_profile_timeseries.xml">OOSTethys oostethys_profile_timeseries.xml</option>
+<option value="xml/NDBC/swe_wave_sample.xml">NDBC Spectral swe_wave_sample.xml</option>
+</select>
+</td>
+</tr>
+</table>
+
+<hr />
+<input type="button" value="DisplayMetadata" onClick="displayHTML('metadata');" >
+<input type="button" value="Display Fields" onClick="displayFields();" >
+<input type="button" value="Display Observation  HTML" onClick="displayHTML('data');" >
+</form>
+<hr>
+<b>Results For: </b>
+<span id="this_url"></span>
+<br />
+<div id="metadata"></div>
+<br />
+<div id="results"></div>
+
+</body>
+</html>

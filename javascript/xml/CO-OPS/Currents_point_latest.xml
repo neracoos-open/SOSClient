@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<om:ObservationCollection xmlns:om="http://www.opengis.net/om/1.0" xmlns:gml="http://www.opengis.net/gml" xmlns:swe="http://www.opengis.net/swe/1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/om/1.0 http://schemas.opengis.net/om/1.0.0/observation.xsd">
+  <gml:metaDataProperty xlink:title="disclaimer">
+    <gml:GenericMetaData>
+      <gml:description>These raw data have not been subjected to the National Ocean Service's quality control or quality assurance procedures and do not meet the criteria and standards of official National Ocean Service data. They are released for limited public use as preliminary data to be used only with appropriate caution.</gml:description>
+    </gml:GenericMetaData>
+  </gml:metaDataProperty>
+  <om:member>
+    <om:Observation>
+      <gml:description>Current observation at a point</gml:description>
+      <gml:name>NOAA.NOS.CO-OPS observations at station ID cb0201</gml:name>
+      <gml:boundedBy>
+        <gml:Envelope srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+          <gml:lowerCorner>37.1396 -76.1432</gml:lowerCorner>
+          <gml:upperCorner>37.1396 -76.1432</gml:upperCorner>
+        </gml:Envelope>
+      </gml:boundedBy>
+      <om:samplingTime>
+        <gml:TimePeriod>
+          <gml:beginPosition>2012-02-22T19:11:00Z</gml:beginPosition>
+          <gml:endPosition>2012-02-22T19:11:00Z</gml:endPosition>
+        </gml:TimePeriod>
+      </om:samplingTime>
+      <om:procedure/>
+      <om:observedProperty/>
+      <om:featureOfInterest>
+        <gml:FeatureCollection>
+          <gml:metaDataProperty>
+            <gml:name codeSpace="http://cf-pcmdi.llnl.gov/documents/cf-conventions/1.6/cf-conventions.html#discrete-sampling-geometries">point</gml:name>
+          </gml:metaDataProperty>
+          <gml:location>
+            <gml:Point srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+              <gml:pos>37.1396 -76.1432</gml:pos>
+            </gml:Point>
+          </gml:location>
+        </gml:FeatureCollection>
+      </om:featureOfInterest>
+      <om:result>
+        <swe:DataStream definition="point">
+          <swe:field name="time">
+            <swe:Time definition="http://www.opengis.net/def/property/OGC/0/SamplingTime">
+              <swe:uom xlink:href="http://www.opengis.net/def/uom/ISO-8601/0/Gregorian"/>
+              <swe:value>2012-02-22T19:11:00Z</swe:value>
+            </swe:Time>
+          </swe:field>
+          <swe:field name="location">
+            <swe:Vector definition="http://www.opengis.net/def/property/OGC/0/PlatformLocation" referenceFrame="http://www.opengis.net/def/crs/EPSG/0/4979">
+              <swe:coordinate name="lat">
+                <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/latitude" axisID="Lat">
+                  <swe:uom code="deg"/>
+                  <swe:value>37.1396</swe:value>
+                </swe:Quantity>
+              </swe:coordinate>
+              <swe:coordinate name="lon">
+                <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/longitude" axisID="Long">
+                  <swe:uom code="deg"/>
+                  <swe:value>-76.1432</swe:value>
+                </swe:Quantity>
+              </swe:coordinate>
+              <swe:coordinate name="bin_distance">
+                <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/altitude" axisID="h">
+                  <swe:description>Estimated depth of bin relative to the water surface</swe:description>
+                  <swe:uom code="m"/>                  
+                  <swe:label>Bin 4</swe:label>
+                  <swe:value>6.52</swe:value>
+                </swe:Quantity>
+              </swe:coordinate>
+            </swe:Vector>
+          </swe:field>
+          <swe:field name="sensor_depth">
+            <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/depth">
+              <swe:uom code="m"/>
+              <swe:value>2.119</swe:value>
+            </swe:Quantity>
+          </swe:field>          
+          <swe:field name="attitude">
+            <swe:Vector definition="http://www.opengis.net/def/property/OGC/0/PlatformOrientation" referenceFrame="http://www.opengis.net/def/crs/OGC/0/ENU">
+              <swe:coordinate name="platform_orientation">
+                <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/platform_orientation" axisID="Z">
+                  <swe:uom code="deg"/>
+                  <swe:value>69.0</swe:value>
+                </swe:Quantity>
+              </swe:coordinate>
+              <swe:coordinate name="platform_pitch_angle">
+                <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/platform_pitch_angle" axisID="X">
+                  <swe:uom code="deg"/>
+                  <swe:value>-3.7</swe:value>
+                </swe:Quantity>
+              </swe:coordinate>
+              <swe:coordinate name="platform_roll_angle">
+                <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/platform_roll_angle" axisID="Y">
+                  <swe:uom code="deg"/>
+                  <swe:value>2.5</swe:value>
+                </swe:Quantity>
+              </swe:coordinate>
+            </swe:Vector>
+          </swe:field>
+          <swe:field name="sea_water_temperature">
+            <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/sea_water_temperature">
+              <swe:uom code="Cel"/>
+              <swe:value>7.6</swe:value>
+            </swe:Quantity>
+          </swe:field>
+          <swe:field name="direction_of_sea_water_velocity">
+            <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/direction_of_sea_water_velocity">
+              <swe:uom code="deg"/>
+            </swe:Quantity>
+          </swe:field>
+          <swe:field name="sea_water_speed">
+            <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/sea_water_speed">
+              <swe:uom code="cm/s"/>
+            </swe:Quantity>
+          </swe:field>
+          <swe:encoding>
+            <swe:TextEncoding blockSeparator="\n" tokenSeparator=","/>
+          </swe:encoding>
+          <swe:values>
+            146.0,31.6
+          </swe:values>
+        </swe:DataStream>
+      </om:result>
+    </om:Observation>
+  </om:member>
+</om:ObservationCollection>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<om:ObservationCollection xmlns:om="http://www.opengis.net/om/1.0" xmlns:gml="http://www.opengis.net/gml" xmlns:swe="http://www.opengis.net/swe/1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/om/1.0 http://schemas.opengis.net/om/1.0.0/observation.xsd">
+  <gml:metaDataProperty xlink:title="disclaimer">
+    <gml:GenericMetaData>
+      <gml:description>These raw data have not been subjected to the National Ocean Service's quality control or quality assurance procedures and do not meet the criteria and standards of official National Ocean Service data. They are released for limited public use as preliminary data to be used only with appropriate caution.</gml:description>
+    </gml:GenericMetaData>
+  </gml:metaDataProperty>
+  <om:member>
+    <om:Observation>
+      <gml:description>Water level preliminary six minute observation at a point</gml:description>
+      <gml:name>NOAA.NOS.CO-OPS observations at station ID 8454000</gml:name>
+      <gml:boundedBy>
+        <gml:Envelope srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+          <gml:lowerCorner>41.8071 -71.4012</gml:lowerCorner>
+          <gml:upperCorner>41.8071 -71.4012</gml:upperCorner>
+        </gml:Envelope>
+      </gml:boundedBy>
+      <om:samplingTime>
+        <gml:TimePeriod>
+          <gml:beginPosition>2012-02-21T18:12:00Z</gml:beginPosition>
+          <gml:endPosition>2012-02-21T18:12:00Z</gml:endPosition>
+        </gml:TimePeriod>
+      </om:samplingTime>
+      <om:procedure/>
+      <om:observedProperty/>
+      <om:featureOfInterest>
+        <gml:FeatureCollection>
+          <gml:metaDataProperty>
+            <gml:name codeSpace="http://cf-pcmdi.llnl.gov/documents/cf-conventions/1.6/cf-conventions.html#discrete-sampling-geometries">point</gml:name>
+          </gml:metaDataProperty>
+          <gml:location>
+            <gml:Point srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+              <gml:pos>41.8071 -71.4012</gml:pos>
+            </gml:Point>
+          </gml:location>
+        </gml:FeatureCollection>
+      </om:featureOfInterest>
+      <om:result>
+        <swe:DataStream definition="point">
+          <swe:field name="time">
+            <swe:Time definition="http://www.opengis.net/def/property/OGC/0/SamplingTime">
+              <swe:uom xlink:href="http://www.opengis.net/def/uom/ISO-8601/0/Gregorian"/>
+              <swe:value>2012-02-21T18:12:00Z</swe:value>
+            </swe:Time>
+          </swe:field>
+          <swe:field name="location">
+            <swe:Vector definition="http://www.opengis.net/def/property/OGC/0/PlatformLocation" referenceFrame="http://www.opengis.net/def/crs/EPSG/0/4979">
+              <swe:coordinate name="lat">
+                <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/latitude" axisID="Lat">
+                  <swe:uom code="deg"/>
+                  <swe:value>41.8071</swe:value>
+                </swe:Quantity>
+              </swe:coordinate>
+              <swe:coordinate name="lon">
+                <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/longitude" axisID="Long">
+                  <swe:uom code="deg"/>
+                  <swe:value>-71.4012</swe:value>
+                </swe:Quantity>
+              </swe:coordinate>
+            </swe:Vector>
+          </swe:field>
+          <swe:field name="water_surface_height_above_reference_datum">
+            <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/water_surface_height_above_reference_datum">
+              <swe:uom code="m"/>
+              <swe:quality>
+                <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/water_surface_reference_datum_altitude">
+                   <swe:label>urn:ioos:def:datum:noaa::MHW</swe:label>
+                   <swe:uom code="m"/>
+                   <swe:value>2.464</swe:value>
+                </swe:Quantity>
+              </swe:quality>
+            </swe:Quantity>
+          </swe:field>
+          <swe:field name="flags">
+            <swe:DataRecord>
+               <swe:field name="sigma">
+                  <swe:Category definition="Needs a definition">
+                      <swe:label>Standard deviation of 1 second samples used to compute the water level height</swe:label>
+                      <swe:codeSpace xlink:href="http://mmisw.org/ont/q2o/flag"/>
+                  </swe:Category>
+               </swe:field>
+               <swe:field name="o">
+                  <swe:Category definition="Needs a definition">
+                      <swe:label>Count of number of samples that fall outside a 3-sigma band about the mean</swe:label>
+                      <swe:codeSpace xlink:href="http://mmisw.org/ont/q2o/flag"/>
+                  </swe:Category>
+               </swe:field>
+               <swe:field name="f">
+                  <swe:Category definition="Needs a definition">
+                      <swe:label>QC flag that when set to 1 indicates that the flat tolerance limit was exceeded</swe:label>
+                      <swe:codeSpace xlink:href="http://mmisw.org/ont/q2o/flag"/>
+                  </swe:Category>
+               </swe:field>
+               <swe:field name="r">
+                  <swe:Category definition="Needs a definition">
+                      <swe:label>QC flag that when set to 1 indicates that the rate of change tolerance limit was exceeded</swe:label>
+                      <swe:codeSpace xlink:href="http://mmisw.org/ont/q2o/flag"/>
+                  </swe:Category>
+               </swe:field>
+               <swe:field name="l">
+                  <swe:Category definition="Needs a definition">
+                      <swe:label>QC flag that when set to 1 indicates that either the maximum or minimum expected water level height limit was exceeded</swe:label>
+                      <swe:codeSpace xlink:href="http://mmisw.org/ont/q2o/flag"/>
+                  </swe:Category>
+               </swe:field>
+            </swe:DataRecord>
+          </swe:field>           
+          <swe:encoding>
+            <swe:TextEncoding blockSeparator="\n" tokenSeparator=","/>
+          </swe:encoding>
+          <swe:values>
+            -1.452,0.0030,0,0,0,0
+          </swe:values>
+        </swe:DataStream>
+      </om:result>
+    </om:Observation>
+  </om:member>
+</om:ObservationCollection>

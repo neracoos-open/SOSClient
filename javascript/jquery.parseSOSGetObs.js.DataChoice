@@ -1,0 +1,671 @@
+///////////////////////
+// Author: Eric Bridger ebridger@gmri.org  eric.bridger@gmail.com
+// Date:   Feb. 2011
+// Describption: Use JQuery to parse OGC Sensor Observation Service GetObservation response XML in SWE CF 1.6 IOOS Profiles
+// Requires:  jQuery 1.5 http://code.jquery.com/jquery-1.5.min.js
+// Tested with:  jQuery 1.6.1 http://code.jquery.com/jquery-1.6.1.min.js
+// Tested with:  jQuery 1.7.1 http://code.jquery.com/jquery-1.7.1.min.js
+//
+// Wed Feb 15 12:34:15 EST 2012
+// Updated to jQuery 1.7.x via the following plugin function filterNode() which replaces [nodeName...] syntax
+// for finding node names with namespace prefixes.  This also supposedly improves performance greatly and is backward compatible.
+// $(xml).find("[nodeName='ows:Title']").text(); now
+// $(xml).filterNode('ows:Title').text();
+// For more details see:
+// http://www.steveworkman.com/html5-2/javascript/2011/improving-javascript-xml-node-finding-performance-by-2000/
+//
+//////////////////////////
+jQuery.fn.filterNode = function(name) {
+    return this.find('*').filter(function() {
+        return this.nodeName === name;
+     });
+};
+//////////////////////////
+// in all these calls xml refers to a DOM object created by jQuery from the Ajax retrieved XML document.
+function SOSObservation(xml)
+{
+    this.checkSOSType(xml);
+    if(this.type === 'EXCEPTION' ){
+        return;
+    }
+    this.members = [];
+    // Since below we are using jQuery's $(this) selector this object reference is not available
+    var thisObj = this;
+
+    // loop thru all om:,member
+   //  creating  Member object Member.metadata, Member.fields, Member.observations
+    $(xml).filterNode('om:member').each(function() {
+        var Member = new Object;
+        var member_node = $(this);
+        Member.metadata = parseMetadataObs(member_node, this.type)
+        var Obs = parseSWEObs(member_node, Member.metadata.cf_foi_type);
+        Member.fields = Obs.fields;
+        Member.dc_fields = Obs.dc_fields;
+        Member.observations = Obs.observations;
+        // HERE
+        // do we need both of these? probably on need in the metadata section
+        Member.dc_exists = Obs.dc_exists;
+        Member.metadata.dc_exists = Obs.dc_exists;
+        thisObj.members.push(Member);
+     });
+    //alert(this.members[0].dc_exists);
+
+}
+
+// returns 'SWE'  or SOS Exception's
+SOSObservation.prototype.checkSOSType = function(xml){
+    var root_node = $(xml).find("*");
+    // Check for SOS ExceptionReport
+    var tag = root_node.get(0).tagName;
+    if(tag.match(/^Exception/i)){
+        var code = $(xml).find("Exception").attr('exceptionCode');
+        var locator = $(xml).find("Exception").attr('locator');
+        var error = code + ' ' + locator + ' ' + $(xml).find("ExceptionText").text();
+        this.type = 'EXCEPTION';
+        this.exception_error = error;
+        return;
+    }
+    // OOSTethys (SWE) uses ows: namespace
+    if(tag.match(/^ows\:Exception/i)){
+        var code = $(xml).find("ows\\:Exception").attr('exceptionCode');
+        var locator = $(xml).find("ows\\:Exception").attr('locator');
+        var error = code + ' ' + locator + ' ' + $(xml).find("ows\\:ExceptionText").text();
+        this.type = 'EXCEPTION';
+        this.exception_error = error;
+        return;
+    }
+    // Sanity check for some type of Observation XML
+    if(!tag.match(/ObservationCollection/i)){
+        this.type = 'EXCEPTION';
+        this.exception_error = "Unknown.  Not an SOS O&M XML response."
+        return;
+    }
+
+    this.type = 'SWE';
+
+    // we only expect one per ObservationCollection
+    var node = root_node.filterNode('gml:metaDataProperty').first();
+    this.md_title = node.attr('xlink:title');
+    var node2 = $(node).filterNode('gml:description').first();
+    this.md_disclaimer = node2.text();
+}
+
+// returns Metadata object with various properties, from the SOS GetObservation response
+function parseMetadataObs(memberNode, type)
+{
+    var md = new Object;
+    md.procedures = [];
+    md.observedProperties = [];
+    var arr = [];
+
+    var node;
+    var node2;
+
+    // HERE YES we CAN have mulitple observations per response ?
+    memberNode.filterNode('om:Observation').each(function() {
+        obs_node = $(this);
+        md.name = obs_node.filterNode('gml:name').first().text();
+        md.description = obs_node.filterNode('gml:description').first().text();
+        //alert(md.name + ' ' + md.description);
+        var lower = obs_node.filterNode('gml:lowerCorner').text();
+        var upper = obs_node.filterNode('gml:upperCorner').text();
+        arr = lower.split(' ');
+        md.llat = arr.shift();
+        md.llon = arr.shift();
+        arr = upper.split(' ');
+        md.ulat = arr.shift();
+        md.ulon = arr.shift();
+        md.start_time = memberNode.filterNode('gml:beginPosition').text();
+        md.end_time = memberNode.filterNode('gml:endPosition').text();
+        if(! md.start_time){ // SWE latest,i.e. one time uses TimeInstant
+            md.start_time = memberNode.filterNode('gml:TimeInstant').text();
+            md.end_time = memberNode.filterNode('gml:TimeInstant').text();
+        }
+        // HERE need examples with observedProperty (check some existing examples DIF and SWE)
+        // we can reuse this right?
+        node = obs_node.filterNode('om:observedProperty');
+        if(node.children().length){
+            node.filterNode('swe:component').each(function() {
+            var op = $(this).attr('xlink:href');
+                if(op){
+                    md.observedProperties.push(op);
+                }
+            });
+        }
+	    // find platform info
+        // This is from jquery.parseSOSGetObs.js and may change in new CF response
+        // currently, like observedProperty set to null.
+    	var node = obs_node.filterNode('om:procedure');
+        if(node.children().length){
+    		var sta = new Object;
+    		sta.stationId = proc.attr('xlink:href');
+    		sta.shortStationId = proc.attr('xlink:href').split(':').pop();
+    		sta.stationName = md.name;
+    		sta.stationDescription = md.description;
+    		sta.lat = md.llat;
+    		sta.lon = md.llon;
+    		md.procedures.push(sta);
+        }
+
+        ///////////////////
+        // featureOfInterest tells us what CF profile and the shape we are dealing with
+        ///////////////////
+
+        node = obs_node.filterNode('gml:FeatureCollection');
+        node2 = $(node).filterNode('gml:name').first();
+        md.foi_code_space = node2.attr('codeSpace');
+        md.foi_cf_type = node2.text();
+        node = obs_node.filterNode('gml:location').first();
+        md.foi_cf_dimen = '';
+        md.foi_cf_positions = [];
+        var pos_str = '';
+        // so far only points and trajectory
+        // trajectories use posList vs pos
+        if(md.foi_cf_type.match(/trajectory/i)){
+            node2 = node.filterNode('gml:posList').first();
+            md.foi_cf_dimen = node2.attr("srsDimension");
+            pos_str = node2.text();
+            // split, even with \s, still returns empty fields, so remove any leading and trailing blanks
+            pos_str = pos_str.replace(/^\s+/m, "");
+            pos_str = pos_str.replace(/\s+$/m, "");
+            // This did not seem to work though it should
+            //pos_str = pos_str.replace(/(^\s+|\s+$)/m, "");
+            md.foi_cf_positions = pos_str.split(/\s+/gm);
+        }else{
+            //pos_str = node.filterNode('gml:pos').first().text();
+            //positions = pos_str.split(/\s+/g);
+            md.foi_cf_positions = node.filterNode('gml:pos').first().text().split(/\s+/g);
+            md.foi_cf_dimen = 1;
+        }
+
+    });
+
+    md.number_of_observedProperties = md.observedProperties.length;
+    md.number_of_procedures = md.procedures.length;
+
+    return md;
+}
+
+// parse OOSTethys SWE GetObservation response. Uses jQuery's filterNode() plugin filterNode('xxxx']).each method.
+// returns SOSGetObs object with two property arrays. fields[] and observations[]
+// fld Object { name: xxx  , uom: xxx, definition: xxx, global_value: xxxx or '' }
+// any of these except name could be null
+// obs Object { fld1: xxx  , fld2: xxx, fld3: xxx } same number of properties as the number of fields
+
+function dataChoiceFld(dc_choices){
+    var fldObj = new Object;
+    fldObj.name = 'swe:DataChoice';
+    fldObj.dc_choices = dc_choices;
+    fldObj.global_value = '';
+
+    return fldObj;
+}
+
+function parseFldQuantity(node)
+{
+    var fldObj = new Object;
+    fldObj.quality = null;
+    fldObj.global_value = '';
+
+
+    fldObj.definition = node.attr("definition");
+    fldObj.name = fldObj.definition.split('/').pop();
+    fldObj.uom = node.filterNode('swe:uom').first().attr("code");
+    // This seems to be working
+    // Wait to check and set global_value, since both Quanity and quality can have swe:values
+    // So check all children and check for quality or swe:value
+
+    node.children().each(function(){
+        var chld_node = $(this);
+        if( chld_node.get(0).tagName == 'swe:quality'){
+            var qualObj = new Object;
+            qualObj.definition = chld_node.filterNode('swe:Quantity').attr("definition");
+            qualObj.name = qualObj.definition.split('/').pop();
+            qualObj.uom = chld_node.filterNode('swe:uom').attr("code");
+            qualObj.label = chld_node.filterNode('swe:label').text();
+            qualObj.global_value = chld_node.filterNode('swe:value').text();
+            fldObj.quality = qualObj;
+        }else if( chld_node.get(0).tagName == 'swe:value'){
+            fldObj.global_value = chld_node.text();
+        }
+    });
+    return fldObj;
+}
+
+function parseFldTime(node)
+{
+    var fldObj = new Object;
+    fldObj.definition = node.attr("definition");
+    fldObj.name = fldObj.definition.split('/').pop();
+    fldObj.uom = node.filterNode('swe:uom').attr("xlink:href");
+    fldObj.global_value = node.filterNode('swe:value').text();
+    return fldObj;
+}
+
+// New Approach
+// HERE
+// cf_type: point, profile, timeSeries, timeSeriesProfile (not trajectory yet)
+function parseSWEObs(memberNode, cf_type)
+{
+    SOSGetObs = new Object;
+    // DataChoice in fields definition
+    var dc_flds = new Object;
+    SOSGetObs.dc_exists = false;
+    var flds = [];
+    var obs = [];
+    var block_sep = '';
+    var token_sep = '';
+
+    // We CAN HAVE multiple om:Observation within an om:ObservationCollection
+    // the caller SOSObservation is handling this, so memberNode is an om:member, each with same foi_cf_type
+    var result = memberNode.filterNode('swe:DataStream');
+    // THIS WORKS
+    var has_dr = false;
+    result.filterNode('swe:DataRecord').each(function() {
+        has_dr = true;
+     });
+    //alert(has_dr);
+    result.children().each(function(){
+        var chld = $(this);
+
+        // So get(0) is need to access the tagName but cannot be used if you want the actual node?
+        var tag = chld.get(0).tagName;
+        var fld_name = chld.attr("name");
+        // Skip value tuples for now. We need the field info to parse them correctly
+        if(tag === 'swe:values'){
+            return true;
+        }
+        //alert(tag + ' ' + fld_name);
+        if(tag === 'swe:encoding'){
+            var enc_node = chld.filterNode('swe:TextEncoding');
+            block_sep = enc_node.attr("blockSeparator");
+            token_sep = enc_node.attr("tokenSeparator");
+            return true;
+
+        }
+        ////////////////////////////
+        // swe:DataChoice for the MulitSensor/Station responses.
+        // NOTE: the time field was in a preceding swe:field
+        ////////////////////////////
+        if(tag === 'swe:DataChoice'){
+            SOSGetObs.dc_exists = true;
+            var dc_choices = [];
+            chld.filterNode('swe:item').each(function() {
+                var dc_chld = $(this);
+                var dc_name = dc_chld.attr("name");
+                var dc_label = dc_chld.filterNode('swe:label').text();
+                //alert(dc_name + ' ' + dc_label);
+                // O.K. but what about any already existing flds?
+                // Create a holder for it in flds.
+                // HERE
+                dc_choices.push(dc_name);
+                //var fldObj = dataChoiceFld(dc_name, dc_label);
+                //flds.push(fldObj);
+
+                dc_flds[dc_name] = []
+                dc_chld.filterNode('swe:field').each(function() {
+                    var this_fld = $(this);
+                    // So get(0) is need to access the tagName but cannot be used if you want the actual node?
+                    var chld_tag = this_fld.children(":first").get(0).tagName;
+                    var fld_chld = this_fld.children(":first");
+                    //alert(this_fld.attr("name"));
+                    //alert(chld_tag);
+                    if(chld_tag  === 'swe:Vector'){
+                        fld_chld.filterNode('swe:Quantity').each(function() {
+                            var quant_node = $(this);
+                            var fldObj = parseFldQuantity(quant_node);
+                            //alert(fldObj.name + ' ' + fldObj.global_value);
+                            dc_flds[dc_name].push(fldObj);
+                         });
+                    }
+                    // HERE timeSeries withVDatum has a swe:quality field w/in Quantity
+                    // This may be a general thing we need to always check? or what?
+                    // I raised this issue, how to use it? Perhaps ignore it for now?
+                    if( chld_tag  === 'swe:Quantity'){
+                        var fldObj = parseFldQuantity(fld_chld);  
+                        dc_flds[dc_name].push(fldObj);
+                        if(fldObj.quality){
+                              alert(fldObj.quality.name);
+                        }
+
+                    }
+                    if(chld_tag  === 'swe:Time'){
+                       var fldObj = parseFldTime(fld_chld);
+                       dc_flds[dc_name].push(fldObj);
+                    }
+                }); // end each swe:DataRecord/swe:field
+            }); // end each swe:DataChoice/swe:item
+            var fldObj = dataChoiceFld(dc_choices);
+            flds.push(fldObj);
+        } // End DataChoice
+        //////////////////////////
+        // timeSeriesProfile has this extra DataRecord, not sure why
+        if(tag === 'swe:DataRecord'){
+            chld.children().each(function(){
+                var chld_node = $(this);
+                alert(chld_node.get(0).tagName);
+                var dr_tag = chld_node.children(":first").get(0).tagName;
+                var dr_chld = chld_node.children(":first");
+                alert(dr_tag);
+            });
+        }
+        // SWE:FIELD
+        // this is most like the pure CSV approach of OOSTethys, with small variations for global values
+        // with swe:Time, swe:Vector holds  lat,lon,altitude, and  swe:Quantity for observed values
+        //////////////////////////
+        // swe:field this is most like the pure CSV approach of OOSTethys, with small variations for global values
+        if(tag === 'swe:field'){
+            // So get(0) is need to access the tagName but cannot be used if you want the actual node?
+            var chld_tag = chld.children(":first").get(0).tagName;
+            var fld_chld = chld.children(":first");
+
+            if(chld_tag  === 'swe:Time'){
+               var fldObj = parseFldTime(fld_chld);
+               flds.push(fldObj);
+            }
+            if(fld_name === 'location' && chld_tag  === 'swe:Vector'){
+                fld_chld.filterNode('swe:Quantity').each(function() {
+                    var quant_node = $(this);
+                    var fldObj = parseFldQuantity(quant_node);  
+                    flds.push(fldObj);
+                }); // end eadh swe:Vector/swe:Quantity
+            }
+            if( chld_tag  === 'swe:Quantity'){
+                var fldObj = parseFldQuantity(fld_chld);  
+                if(fldObj.quality){
+                    //alert(fldObj.quality.name);
+                }
+                flds.push(fldObj);
+            }
+        }
+    }); // end each result (DataStream) children
+////////////////////////////////////////////////////////////////////////////////////////////  results Field defining
+    //alert(SOSGetObs.dc_exists);
+
+    var dc_val_flds = [];
+    var val_flds = [];
+
+    // HERE need to get observations[] working
+    // This whole var test loop is just a test
+    var test = 'FLDS<br />';
+    for(var j = 0; j < flds.length; j++){
+        var this_fld = flds[j];
+        if( this_fld.name == 'swe:DataChoice'){
+            test += 'DataChoice: ' +  this_fld.dc_choices.join(',') + '<br />';
+            for( var name in dc_flds){
+                var fnames = [];
+                var len = dc_flds[name].length;
+                for(var i = 0; i < len; i++){
+                    var dc_fld = dc_flds[name][i];
+                    if( ! dc_fld.global_value){
+                        fnames.push(dc_fld.name);
+                     }
+                }
+                dc_val_flds[name] =  fnames;
+            }
+        } // end if DataChoice
+        if( ! this_fld.global_value){
+            test += this_fld.name + ' ';
+            test += this_fld.definition + ' ';
+            test += this_fld.uom + ' ';
+            test += this_fld.global_value + '<br />';
+            val_flds.push(this_fld.name);
+        }
+    }
+
+
+    test += '<br />DC_FLDS<br />';
+    for( var name in dc_flds){
+        //alert(name);
+        var len = dc_flds[name].length;
+        for(var i = 0; i < len; i++){
+            var this_fld = dc_flds[name][i];
+            if( this_fld.global_value){
+                continue;
+            }
+            test += name + ': ';
+            test += this_fld.name + ' ';
+            //test += this_fld.definition + ' ';
+            test += this_fld.uom + ' ';
+            test += this_fld.global_value + '<br />';
+        }
+    }
+    // HERE Turned off display of this test 
+    $("#metadata").text('');
+    $("#metadata").append(test);
+
+    // O.K. This works but ....
+/************** 
+    for(i=0; i < val_flds.length; i++){
+        alert(val_flds[i]);
+    }
+
+    for( var name in dc_val_flds){
+        for(i=0; i < dc_val_flds[name].length; i++){
+            alert(name + ' ' + dc_val_flds[name][i]);
+        }
+    }
+
+    for(var j = 0; j < flds.length; j++){
+        var this_fld = flds[j];
+        if( ! this_fld.global_value){
+            val_flds.push(this_fld.name);
+        }
+    }
+
+**************/
+
+    var values = result.filterNode('swe:values').text();
+    values = values.replace(/^\s+/m, "");
+    values = values.replace(/\s+$/m, "");
+    var block_re = new RegExp(block_sep);
+    var token_re = new RegExp(token_sep);
+    // this doesn't work
+    //var tuples = values.split(/block_sep/);
+
+    var tuples = values.split(block_re);
+    //alert('tuple count: ' + tuples.length);
+
+    // NO it's not working. Forgot that the way this works.
+    // Foreach tuple (i.e. line) we create one obs Object {time: xxx, val1: xxx, val2: xxx}
+    // O.K. This seems very close still need to fix obsHTML for dc_flds names
+    // This assumes fdls array and tuples are the same size but no longer
+    for(var i = 0; i < tuples.length; i++){
+        var vals = tuples[i].split(token_re);
+        var obsObj = new Object;
+        for(var j = 0; j < vals.length; j++){
+            // This assumes fdls array and tuples are the same size but no longer
+            var fld_name = val_flds[j];
+            if(fld_name == 'swe:DataChoice'){
+			    var dc_name = vals[j];
+                // HERE
+                j++;  // skip the data choice?
+                for(k=0; k < dc_val_flds[dc_name].length; k++){
+                    var dc_fld_name = dc_val_flds[dc_name][k];
+			        obsObj[dc_fld_name] = vals[j + k];
+                    //alert(dc_name + ' ' + dc_fld_name + ' ' + vals[j + k]);
+                }
+                j += k;
+            }else{
+			    obsObj[fld_name] = vals[j];
+            } 
+            //alert('j ' + j);
+       } // end vals loop
+       // HERE Seems to be an extra SamplingTime only field
+       //for(var n in obsObj){
+        //   alert(n);
+       //}
+       obs.push(obsObj);
+   }
+
+    SOSGetObs.fields = flds;
+    SOSGetObs.observations = obs;
+    SOSGetObs.dc_fields = dc_flds;
+
+    return(SOSGetObs);
+
+} // end parseSWEObs
+
+
+///////////////////////////
+/// Some utility output formats. Should wrap all these into an Object at some point
+////////////////////////////
+SOSObservation.prototype.metadataHTML = function ()
+{
+    var html = '<b>Observation Collection Metadata</b><br />';
+    html += this.md_title + ': ' + this.md_disclaimer + '<br />';
+
+    for (var j = 0; j < this.members.length; j++){
+
+        var metadata = this.members[j].metadata;
+
+        html += '<table cellpadding="4" border="1">';
+        for( var name in metadata){
+            if(name === 'procedures' || name === 'observedProperties'){
+                continue;
+            }
+            html += '<tr><td><b>' + [name] + '</b></td><td>' + metadata[name] + '</td></tr>';
+        }
+        html += '<tr><td colspan="2">observedProperties</td></tr>';
+        for (var i = 0; i < metadata.observedProperties.length; i++){
+                html += '<tr><td><b>observedProperty</b></td><td>' + metadata.observedProperties[i] + '</td></tr>';
+        }
+        html += '<tr><td colspan="2">procedures</td></tr>';
+        for (var i = 0; i < metadata.procedures.length; i++){
+            var platform = metadata.procedures[i];
+            for(var plat in platform){
+                html += '<tr><td><b>' + [plat] + '</b></td><td>' + platform[plat] + '</td></tr>';
+            }
+            if(metadata.procedures.length > 1){
+                html += '<tr><td colspan="2" bgcolor="yellow"></td></tr>';
+            }
+        }
+        html += '</table>';
+        html += '<hr>';
+
+    } // end for this.members
+
+    return html;
+}
+
+SOSObservation.prototype.obsHTML = function()
+{
+    var final_html = '';
+
+    for (var j = 0; j < this.members.length; j++){
+        var fields = this.members[j].fields;
+        var dc_fields = this.members[j].dc_fields;
+/*
+        for(var bb in dc_fields){
+            alert(bb);
+        }
+*/
+        var global_html = '<b>Globals</b> for ' + this.members[j].metadata.name + '<br />';
+        var html = '<b>Values</b><br />';
+
+        global_html += '<table cellpadding="4" border="1">';
+        html += '<table cellpadding="4" border="1">';
+        // Member.fields
+        // fields is an array of fld Objects
+        // fld Object { name: xxx  , uom: xxx, definition: xxx, global_value: xxxx }
+        // any of these except name could be null
+        for(var i = 0; i < fields.length; i++){
+            var fld = fields[i];
+            // HERE  Not quite working but close: Really may need to handle to two data choices separately.
+            // May need a DataChoice memeber for the ObsObjects
+            if(fld.name == 'swe:DataChoice'){
+                for(var z = 0; z < fld.dc_choices.length; z++){
+                    var dc_name = fld.dc_choices[z];
+                    global_html += '<tr><th colspan="2">' + dc_name + '</th>';
+                    for(k=0; k < dc_fields[dc_name].length; k++){
+                        var dc_fld = dc_fields[dc_name][k];
+                        // here need check for global_value
+                        if(dc_fld.global_value){
+                            global_html += '<th>' + dc_fld.name + ' (' + dc_fld.uom + ')</th>';
+                            global_html += '<td>' + dc_fld.global_value + '</td></tr>';
+                        }
+                    }
+                }
+                continue;
+            }
+            if(fld.global_value){
+                if(fld.uom){
+                    global_html += '<tr><td><b>' + fld.name + '</b> (' + fld.uom + ')</td>';
+                }else{
+                    global_html += '<tr><td><b>' + fld.name + '</b></td>';
+                }
+                global_html += '<td>' + fld.global_value + '</td></tr>';
+                continue;
+            }
+            if(fld.uom){
+                html += '<tr><th>' + fld.name + ' (' + fld.uom + ')</th>';
+            }else{
+                html += '<tr><th>' + fld.name + '</th>';
+            }
+        }
+
+        html += '</tr>';  // end header row
+        global_html += '</table>';
+
+        var observations = this.members[j].observations;
+        // Member.observations is an array of obs Objects
+        // obs Object { fld1: xxx  , fld2: xxx, fld3: xxx } same number as number of flds
+        for(var i = 0; i < observations.length; i++){
+            html += '<tr>';
+            var obs = observations[i];
+            for ( var name in obs){
+                html += '<td>' + obs[name] + '</td>';
+            }
+            html += '</tr>';
+        }
+        html += '</table><hr>';
+        final_html += global_html +  html;
+    
+    } // for this.members[j]
+
+    return( final_html);
+}
+
+
+SOSObservation.prototype.CSV = function()
+{
+    var csv = '';
+    // SOSGetObs.fields
+    // fields is an array of fld Objects
+    // fld Object { name: xxx  , uom: xxx, definition: xxx }
+    // any of these except name could be null
+    for(var i = 0; i < this.fields.length; i++){
+        var fld = this.fields[i];
+        if(fld.uom){
+            csv += '"' + fld.name + ' (' + fld.uom + ')",';
+        }else{
+            csv += '"' + fld.name + '",';
+        }
+    }
+
+    csv = csv.slice(0,-1); // remove trailing comma
+
+    csv += "\n"; // end header row
+
+    // SOSGetOBs.observations is an array of obsObj
+    // obs Object { fld1: xxx  , fld2: xxx, fld3: xxx } same number as number of flds
+    for(var i = 0; i < this.observations.length; i++){
+        var obs = this.observations[i];
+        var tmp = '';
+        var j = 0;
+        for ( var name in obs){
+            // Kind of a hack. Check the correspond fld object for defined .uom  to see if quotes or not
+            // Should probably make the obsObj have time: name: val: uom:
+            var fld = this.fields[j];
+            if(fld.uom){
+                tmp += obs[name] + ',';
+            }else{
+                tmp += '"' + obs[name] + '",';
+            }
+            j++;
+        }
+        tmp = tmp.slice(0,-1); // remove trailing comma
+        csv += tmp + "\n";
+    }
+    return csv;
+}

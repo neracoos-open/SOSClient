@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<om:ObservationCollection xmlns:om="http://www.opengis.net/om/1.0" xmlns:gml="http://www.opengis.net/gml" xmlns:swe="http://www.opengis.net/swe/1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/om/1.0 http://schemas.opengis.net/om/1.0.0/observation.xsd">
+  <gml:metaDataProperty xlink:title="disclaimer">
+    <gml:GenericMetaData>
+      <gml:description>These values are generated using the most recent set of Harmonic Constants and Datums available for the station. Harmonic Constants are updated on a frequent basis to ensure the most accurate tidal predictions possible and tidal datums are updated based on a tidal epoch. The electronic tide predictions may not match the officially published Tide Tables, which are compiled in advance and released annually. Please see the following websites for more information: Harmonic Constituents http://www.tidesandcurrents.noaa.gov/station_retrieve.shtml?type=Harmonic+Constituents, Tide Predictions http://tidesandcurrents.noaa.gov/tide_pred.html and Datums http://tidesandcurrents.noaa.gov/datum_options.html.</gml:description>
+    </gml:GenericMetaData>
+  </gml:metaDataProperty>
+  <om:member>
+    <om:Observation>
+      <gml:description>Hourly tide predictions at a point at a series of times</gml:description>
+      <gml:name>NOAA.NOS.CO-OPS predictions at station ID 8724580</gml:name>
+      <gml:boundedBy>
+        <gml:Envelope srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+          <gml:lowerCorner>24.5557 -81.8079</gml:lowerCorner>
+          <gml:upperCorner>24.5557 -81.8079</gml:upperCorner>
+        </gml:Envelope>
+      </gml:boundedBy>
+      <om:samplingTime>
+        <gml:TimePeriod>
+          <gml:beginPosition>2012-02-22T01:00:00Z</gml:beginPosition>
+          <gml:endPosition>2012-02-23T00:00:00Z</gml:endPosition>
+        </gml:TimePeriod>
+      </om:samplingTime>
+      <om:procedure/>
+      <om:observedProperty/>
+      <om:featureOfInterest>
+        <gml:FeatureCollection>
+          <gml:metaDataProperty>
+            <gml:name codeSpace="http://cf-pcmdi.llnl.gov/documents/cf-conventions/1.6/cf-conventions.html#discrete-sampling-geometries">timeSeries</gml:name>
+          </gml:metaDataProperty>
+          <gml:location>
+            <gml:Point srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+              <gml:pos>24.5557 -81.8079</gml:pos>
+            </gml:Point>
+          </gml:location>
+        </gml:FeatureCollection>
+      </om:featureOfInterest>
+      <om:result>
+        <swe:DataStream definition="timeSeries">
+          <swe:field name="time">
+            <swe:Time definition="http://www.opengis.net/def/property/OGC/0/SamplingTime">
+              <swe:uom xlink:href="http://www.opengis.net/def/uom/ISO-8601/0/Gregorian"/>
+            </swe:Time>
+          </swe:field>
+          <swe:field name="location">
+            <swe:Vector definition="http://www.opengis.net/def/property/OGC/0/PlatformLocation" referenceFrame="http://www.opengis.net/def/crs/EPSG/0/4979">
+              <swe:coordinate name="lat">
+                <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/latitude" axisID="Lat">
+                  <swe:uom code="deg"/>
+                  <swe:value>24.5557</swe:value>
+                </swe:Quantity>
+              </swe:coordinate>
+              <swe:coordinate name="lon">
+                <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/longitude" axisID="Long">
+                  <swe:uom code="deg"/>
+                  <swe:value>-81.8079</swe:value>
+                </swe:Quantity>
+              </swe:coordinate>
+            </swe:Vector>
+          </swe:field>
+          <swe:field name="sea_surface_height_amplitude_due_to_equilibrium_ocean_tide">
+            <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/sea_surface_height_amplitude_due_to_equilibrium_ocean_tide">
+              <swe:uom code="m"/>
+              <swe:quality>
+                <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/water_surface_reference_datum_altitude">
+                   <swe:label>urn:ioos:def:datum:noaa::MHW</swe:label>
+                   <swe:uom code="m"/>
+                   <swe:value>1.853</swe:value>
+                </swe:Quantity>
+              </swe:quality>
+              <swe:quality>
+                <swe:Text definition="Needs a defnition epoch">
+                   <swe:label>Epoch</swe:label>
+                   <swe:value>1983/2001</swe:value>
+                </swe:Text>
+              </swe:quality>
+              <swe:quality>
+                <swe:Quantity definition="Needs a defnition ltide">
+                   <swe:label>Lowest Astronomical Tide</swe:label>
+                   <swe:uom code="m"/>
+                   <swe:value>-0.71</swe:value>
+                </swe:Quantity>
+              </swe:quality>
+              <swe:quality>
+                <swe:Quantity definition="Needs a defnition htide">
+                   <swe:label>Highest Astronomical Tide</swe:label>
+                   <swe:uom code="m"/>
+                   <swe:value>0.35</swe:value>
+                </swe:Quantity>
+              </swe:quality>
+              <swe:quality>
+                <swe:Text definition="Needs a defnition days_analysed">
+                   <swe:label>LAT/HAT Datum Confidence Level (days_data_record_analysed)</swe:label>
+                   <swe:value>High(Greater Than or Equal to 1 Year of Data)</swe:value>
+                </swe:Text>
+              </swe:quality>              
+            </swe:Quantity>
+          </swe:field>
+          <swe:encoding>
+            <swe:TextEncoding blockSeparator="\n" tokenSeparator=","/>
+          </swe:encoding>
+          <swe:values>
+            2012-02-22T01:00:00Z,-0.053
+            2012-02-22T02:00:00Z,0.015
+            2012-02-22T03:00:00Z,0.033
+            2012-02-22T04:00:00Z,-0.015
+            2012-02-22T05:00:00Z,-0.125
+            2012-02-22T06:00:00Z,-0.272
+            2012-02-22T07:00:00Z,-0.412
+            2012-02-22T08:00:00Z,-0.502
+            2012-02-22T09:00:00Z,-0.524
+            2012-02-22T10:00:00Z,-0.480
+            2012-02-22T11:00:00Z,-0.395
+            2012-02-22T12:00:00Z,-0.291
+            2012-02-22T13:00:00Z,-0.190
+            2012-02-22T14:00:00Z,-0.110
+            2012-02-22T15:00:00Z,-0.068
+            2012-02-22T16:00:00Z,-0.083
+            2012-02-22T17:00:00Z,-0.158
+            2012-02-22T18:00:00Z,-0.275
+            2012-02-22T19:00:00Z,-0.398
+            2012-02-22T20:00:00Z,-0.483
+            2012-02-22T21:00:00Z,-0.503
+            2012-02-22T22:00:00Z,-0.458
+            2012-02-22T23:00:00Z,-0.365
+            2012-02-23T00:00:00Z,-0.250
+          </swe:values>
+        </swe:DataStream>
+      </om:result>
+    </om:Observation>
+  </om:member>
+</om:ObservationCollection>

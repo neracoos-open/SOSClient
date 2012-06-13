@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<om:ObservationCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:om="http://www.opengis.net/om/1.0" xmlns:gml="http://www.opengis.net/gml" xmlns:swe="http://www.opengis.net/swe/1.0.1" xsi:schemaLocation="http://www.opengis.net/om/1.0 http://schemas.opengis.net/om/1.0.0/om.xsd" gml:id="NERACOOS_sensor">
+
+  <gml:description>SEA_WATER_TEMPERATURE measurements from Univ. of Maine A01</gml:description>
+  <gml:name>SEA_WATER_TEMPERATURE measurements from Univ. of Maine A01</gml:name>
+  <gml:boundedBy>
+      <gml:Envelope srsName="urn:ogc:def:crs:EPSG:6.5:4326">
+<!-- overwrite these with your actual offering ROI -->
+          <gml:lowerCorner>42.5232 -70.5655</gml:lowerCorner>
+          <gml:upperCorner>42.5232 -70.5655</gml:upperCorner>
+      </gml:Envelope>
+  </gml:boundedBy>
+  <gml:metaDataProperty xlink:title="disclaimer">
+    <gml:GenericMetaData>
+      <gml:description>NERACOOS DISCLAIMER</gml:description>
+    </gml:GenericMetaData>
+  </gml:metaDataProperty>
+  <om:member>
+      <om:Observation gml:id="NERACOOS_A01">
+          <gml:description>SEA_WATER_TEMPERATURE measurements from Univ. of Maine A01</gml:description>
+          <gml:name>SEA_WATER_TEMPERATURE measurements from Univ. of Maine A01</gml:name>
+          <gml:boundedBy>
+              <gml:Envelope srsName="urn:ogc:def:crs:EPSG:6.5:4326">
+                  <!-- overwrite these with your actual offering  ROI -->
+                  <gml:lowerCorner>42.5232 -70.5655</gml:lowerCorner>
+                  <gml:upperCorner>42.5232 -70.5655</gml:upperCorner>
+              </gml:Envelope>
+          </gml:boundedBy>     
+          <!-- Observation time -->
+          <om:samplingTime><gml:TimePeriod xsi:type="gml:TimePeriodType"><gml:beginPosition>2012-03-09T00:00:00Z</gml:beginPosition><gml:endPosition>2012-03-09T10:00:00Z</gml:endPosition></gml:TimePeriod></om:samplingTime>
+          <!-- Sensor description (SensorML) -->
+          <om:procedure xlink:href="urn:ogc:neracoos.org:def:source:mooring:A01"/>
+         <!-- Observed Property, can be multiple -->
+         <om:observedProperty>
+         <swe:CompositePhenomenon dimension="1" gml:id="BUOY_OBSERVABLES">
+               <gml:name>Buoy Observables</gml:name>
+          <swe:component xlink:href="urn:ogc:def:phenomenon:mmisw.org:cf:sea_water_temperature"/></swe:CompositePhenomenon>
+          </om:observedProperty>
+           <!-- Result Structure, Encoding, and Data -->
+          <om:featureOfInterest xlink:href="urn:ogc:def:object:feature:FOI_A01">
+            <gml:FeatureCollection>
+              <gml:metaDataProperty>
+                <gml:name codeSpace="http://cf-pcmdi.llnl.gov/documents/cf-conventions/1.6/cf-conventions.html#discrete-sampling-geometries">timeSeriesProfile</gml:name>
+              </gml:metaDataProperty>
+              <gml:location>
+                <gml:Point srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+                  <gml:pos>42.5232 -70.5655</gml:pos>
+                </gml:Point>
+              </gml:location>
+            </gml:FeatureCollection>
+          </om:featureOfInterest>
+           <om:result>
+               <swe:DataStream>
+                   <swe:elementCount>
+                       <swe:Count>
+                             <swe:value>54</swe:value>  <!-- Number of Records here -->
+                         </swe:Count>
+                     </swe:elementCount>
+                         <swe:DataRecord>
+                            <swe:field name="PlatformName">
+                                <swe:Quantity definition="urn:mmisw.org#platform">
+                                <swe:value>A01</swe:value>
+                                </swe:Quantity>
+                            </swe:field>
+                            <!--  Time -->
+                            <swe:field name="time">
+                                <swe:Time definition="http://www.opengis.net/def/property/OGC/0/SamplingTime">
+                                    <swe:uom xlink:href="http://www.opengis.net/def/uom/ISO-8601/0/Gregorian"/>
+                                </swe:Time>
+                            </swe:field>
+                            <swe:field name="latitude">
+                                <swe:Quantity definition="urn:ogc:phenomenon:latitude:wgs84">
+                                    <swe:uom code="deg"/>
+                                    <swe:value>42.5232</swe:value>
+                                </swe:Quantity>
+                            </swe:field>
+                            <swe:field name="longitude">
+                                <swe:Quantity definition="urn:ogc:phenomenon:longitude:wgs84">
+                                     <swe:uom code="deg"/> 
+                                     <swe:value>-71.5655</swe:value>
+                                </swe:Quantity>
+                            </swe:field>
+                            <swe:field name="depth">
+                                     <swe:Quantity definition="http://mmisw.org/cf#depth" referenceFrame="urn:ogc:def:crs:EPSG:6.15:5113">
+                                     <swe:uom code="m"/>
+                                 </swe:Quantity>
+                            </swe:field>
+                            <!--  Observable fields -->
+                            
+                         <swe:field name="observedProperty1">
+                                <swe:Quantity definition="urn:ogc:def:phenomenon:mmisw.org:cf:sea_water_temperature">
+                                    <swe:uom code="Cel"/>                    
+                                </swe:Quantity>
+                            </swe:field>
+                          </swe:DataRecord>
+                     <swe:encoding>
+                         <!-- swe:TextBlock blockSeparator=" " decimalSeparator="." tokenSeparator=","/ -->
+                         <swe:TextEncoding blockSeparator=" " tokenSeparator=","/>
+                     </swe:encoding>
+                     <swe:values>2012-03-09T00:00:00Z,1,5.48400020599365 2012-03-09T00:00:00Z,2,5.47144794 2012-03-09T00:00:00Z,20,5.59999990463257 2012-03-09T00:00:00Z,50,5.79699993133545 2012-03-09T00:30:00Z,1,5.48600006103516 2012-03-09T01:00:00Z,1,5.49200010299683 2012-03-09T01:00:00Z,2,5.47144794 2012-03-09T01:00:00Z,20,5.61100006103516 2012-03-09T01:00:00Z,50,5.75400018692017 2012-03-09T01:30:00Z,1,5.5019998550415 2012-03-09T02:00:00Z,1,5.52899980545044 2012-03-09T02:00:00Z,2,5.50374937 2012-03-09T02:00:00Z,20,5.61899995803833 2012-03-09T02:00:00Z,50,5.72700023651123 2012-03-09T02:30:00Z,1,5.54400014877319 2012-03-09T03:00:00Z,1,5.56300020217896 2012-03-09T03:00:00Z,2,5.53604317 2012-03-09T03:00:00Z,20,5.68100023269653 2012-03-09T03:00:00Z,50,5.71600008010864 2012-03-09T03:30:00Z,1,5.57299995422363 2012-03-09T04:00:00Z,1,5.58300018310547 2012-03-09T04:00:00Z,2,5.53604317 2012-03-09T04:00:00Z,20,5.62599992752075 2012-03-09T04:00:00Z,50,5.7189998626709</swe:values>
+               </swe:DataStream>
+             </om:result>
+         </om:Observation>
+     </om:member>
+</om:ObservationCollection>

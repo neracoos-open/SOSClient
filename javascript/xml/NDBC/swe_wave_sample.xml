@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<om:ObservationCollection xmlns:om="http://www.opengis.net/om/1.0" xmlns:gml="http://www.opengis.net/gml" xmlns:swe="http://www.opengis.net/swe/1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/om/1.0 http://schemas.opengis.net/om/1.0.0/observation.xsd">
+  <gml:metaDataProperty xlink:title="disclaimer">
+    <gml:GenericMetaData>
+      <gml:description>Does IOOS have any suggestion for DISCLAIMER text?  Is this mandatory?</gml:description>
+    </gml:GenericMetaData>
+  </gml:metaDataProperty>
+  <om:member>
+    <om:Observation>
+      <gml:description>waves observations at 42040</gml:description>
+      <gml:name>urn:ioos:station:wmo:42040</gml:name>
+      <gml:boundedBy>
+        <gml:Envelope srsName="urn:ogc:def:crs:epsg::4326">
+          <gml:lowerCorner>29.21 -88.21</gml:lowerCorner>
+          <gml:upperCorner>29.21 -88.21</gml:upperCorner>
+        </gml:Envelope>
+      </gml:boundedBy>
+      <om:samplingTime>
+        <gml:TimePeriod>
+          <gml:beginPosition>2012-03-13T14:50:00Z</gml:beginPosition>
+          <gml:endPosition>2012-03-13T14:50:00Z</gml:endPosition>
+        </gml:TimePeriod>
+      </om:samplingTime>
+      <om:procedure/>
+      <om:observedProperty xlink:href="http://mmisw.org/ont/cf/parameter/waves"/>
+      <om:featureOfInterest>
+        <gml:FeatureCollection>
+          <gml:metaDataProperty>
+            <gml:name codeSpace="http://cf-pcmdi.llnl.gov/documents/cf-conventions/1.6/cf-conventions.html#discrete-sampling-geometries">point</gml:name>
+          </gml:metaDataProperty>
+          <gml:location>
+            <gml:Point srsName="http://www.opengis.net/def/crs/EPSG/0/4326">
+              <gml:pos>29.21 -88.21</gml:pos>
+            </gml:Point>
+          </gml:location>
+        </gml:FeatureCollection>
+      </om:featureOfInterest>
+      <om:result>
+        <swe:DataStream definition="point">
+          <swe:field name="time">
+            <swe:Time definition="&quot;http://www.opengis.net/def/property/OGC/0/SamplingTime">
+              <swe:uom xlink:href="http://www.opengis.net/def/uom/ISO-8601/0/Gregorian"/>
+              <swe:value>2012-03-13T14:50:00Z</swe:value>
+            </swe:Time>
+          </swe:field>
+          <swe:field name="location">
+            <swe:Vector definition="http://www.opengis.net/def/property/OGC/0/PlatformLocation" referenceFrame="http://www.opengis.net/def/crs/EPSG/0/4979">
+              <swe:coordinate name="lat">
+                <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/latitude" axisID="Lat">
+                  <swe:uom code="deg"/>
+                  <swe:value>30.04</swe:value>
+                </swe:Quantity>
+              </swe:coordinate>
+              <swe:coordinate name="lon">
+                <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/longitude" axisID="Long">
+                  <swe:uom code="deg"/>
+                  <swe:value>-80.55</swe:value>
+                </swe:Quantity>
+              </swe:coordinate>
+              <swe:coordinate name="z">
+                <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/altitude" axisID="h">
+                  <swe:uom code="m"/>
+                  <swe:value>9999</swe:value>
+                </swe:Quantity>
+              </swe:coordinate>
+            </swe:Vector>
+          </swe:field>
+<!-- Individual fields such as wave height, direction, etc.  Followed by array of spectral values with count of frequencies in the data. -->
+          <swe:field name="sea_surface_wave_significant_height">
+            <swe:Quantity definition="http://mmisw.org/ont/cf/parameter/sea_surface_wave_significant_height">
+              <swe:uom code="m"/>
+            </swe:Quantity>
+          </swe:field>
+          <swe:field name="sea_surface_wave_peak_period">
+            <swe:Quantity definition="http://fixme.vocab/sea_surface_wave_peak_period">
+              <swe:uom code="s"/>
+            </swe:Quantity>
+          </swe:field>
+<!-- More individual fields would go here... -->
+          <swe:field name="spectral_measurements">
+          <swe:DataArray>
+              <swe:DataRecord>
+                <swe:field name="center_frequency">
+                  <swe:Quantity definition="http://fixme.vocab/center_frequency">
+                    <swe:uom code="Hz"/>
+                  </swe:Quantity>
+                </swe:field>
+                <swe:field name="bandwidth">
+                  <swe:Quantity definition="http://fixme.vocab/bandwidth">
+                    <swe:uom code="Hz"/>
+                  </swe:Quantity>
+                </swe:field>
+                <swe:field name="spectral_energy">
+                  <swe:Quantity definition="http://fixme.vocab/spectral_energy">
+                    <swe:uom code="m**2/Hz"/>
+                  </swe:Quantity>
+                </swe:field>
+                <swe:field name="mean_wave_direction">
+                  <swe:Quantity definition="http://fixme.vocab/mean_wave_direction">
+                    <swe:uom code="deg"/>
+                  </swe:Quantity>
+                </swe:field>
+                <swe:field name="principal_wave_direction">
+                  <swe:Quantity definition="http://fixme.vocab/principal_wave_direction">
+                    <swe:uom code="deg"/>
+                  </swe:Quantity>
+                </swe:field>
+                <swe:field name="polar_coordinate_r1">
+                  <swe:Quantity definition="http://fixme.vocab/polar_coordinate_r1">
+                    <swe:uom code="1"/>
+                  </swe:Quantity>
+                </swe:field>
+                <swe:field name="polar_coordinate_r2">
+                  <swe:Quantity definition="http://fixme.vocab/polar_coordinate_r2">
+                    <swe:uom code="1"/>
+                  </swe:Quantity>
+                </swe:field>
+              </swe:DataRecord>
+          </swe:DataArray>
+          </swe:field>
+          <swe:encoding>
+            <swe:TextEncoding decimalSeparator="." tokenSeparator="," blockSeparator="\n"/>
+          </swe:encoding>
+          <swe:values>1.62,7.14,2,0.0325,0.0050,0,154.0,103.0,0.291452,0.38254,0.0375,0.0050,0,30.0,88.0,0.234465,0.0913335</swe:values>
+<!-- where this sample has wave height=1.62 and peak period=7.14 followed by an array of two frequencies
+frequency#1 = 0.0325 with bandwidth=0.0050, spectral energy=0, mean wave direction=154.0, principal wave direction=103.0, r1=0.291452 and r2=0.38254
+and 
+frequency#2 = 0.0375 with bandwidth=0.0050, spectral energy=0, mean wave direction=30.0,  principal wave direction=88.0,  r1=0.234465 and r2=0.0913335
+-->
+        </swe:DataStream>
+      </om:result>
+    </om:Observation>
+  </om:member>
+</om:ObservationCollection>
+
