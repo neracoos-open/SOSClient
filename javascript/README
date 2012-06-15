@@ -11,12 +11,15 @@ E.g. <sos:Capabilities>
 These are aimed at the SOS servers being developed by the NOAA / IOOS program  http://www.ioos.gov/.
 There is support for the new 2012 IOOS SOS CDM Discrete Observation Profiles, based on SOS1/.0 and SWE10.
 It also maintains support for OOSTethys SWE1.0 type responses.
+See the latest version of the official templates at:
+http://code.google.com/p/ioostech/source/browse/#svn/trunk/templates/1.0
 ===========
 
 Documenentation files and examples are included.
 Open test.html in browser to get started.
 Examples of the new SOS Profile xml files are also included in the xml subdir.
-test.html must be installed on a web server in order to load the xml examples.
+Note: test.html must be installed on a web server in order to load the xml examples,
+due to Javascript / AJAX restrictions on client access to the local file system.
 
 Requirements:  jQuery 1.7.1 http://code.jquery.com/jquery-1.7.1.min.js
 jQuery 1.7 dropped support for find("[nodeName='xxx:element_name']") so a new plugin function was defined.
